@@ -1,0 +1,19 @@
+.col-lg-10 input{
+    background: transparent;
+    border: 1px solid rgb(54, 54, 54);
+    outline: none;
+    color: rgb(96, 96, 96);
+    border-radius: 3px;
+}
+.forgot-password{
+    color: rgb(0, 162, 255);
+    font-size: small;
+    cursor: pointer;
+}
+.navigate-to-register{
+    font-size: small;
+
+}
+.login-with-fb,.login-with-google{
+    cursor: pointer;
+}

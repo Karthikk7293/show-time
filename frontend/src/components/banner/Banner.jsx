@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from 'react'
+import { Rating } from "@material-ui/lab";
+
+  
+import axios from '../TMDB/Axios';
+import { TMDB_API_KEY, TMDB_IMAGE_URL } from '../TMDB/TMDB_CONSTANTS';
+
+import './banner.css'
+
+function Banner() {
+
+    const [movie, setMovie] = useState('');
+    const options = {
+        value: movie.vote_average,
+        readOnly: true, 
+        precision: 0.5,
+      };
+
+    useEffect(() => {
+        axios.get(`trending/all/day?api_key=${TMDB_API_KEY}`).then((response) => {
+            setMovie(response.data.results.sort(() => { return 0.5 - Math.random() })[0])
+        })
+    }, []);
+
+    return (
+        <div style={{ backgroundImage: `url(${movie ? TMDB_IMAGE_URL + movie.backdrop_path : "http://image.tmdb.org/t/p/w500/wrhLyiY7ksW0fQCqNpa52qiOAH8.jpg"})` }}
+            // background:url(http://image.tmdb.org/t/p/w500/wrhLyiY7ksW0fQCqNpa52qiOAH8.jpg)
+            className="conatainer-fluid banner m-0 p-0" >
+            <div className="banner-row pt-5 d-flex justify-content-around">
+                <div className="col-lg-6 ps-4 pt-5">
+                    <div className="buttons">
+                        <button className="play rounded m-1">
+                            <ion-icon name="play"></ion-icon> <span>VIEW</span>
+                        </button>
+                        <button className="my-list rounded m-1">
+                            <ion-icon name="add"></ion-icon><span> HOME</span>
+                        </button>
+                    </div>
+                    <div className="title text-light">
+
+                        <h1 className='text-uppercase '>{movie && movie ? movie.original_title : movie.original_name ? movie.name : ""} </h1>
+                        {movie.vote_average && <Rating {...options} />}
+                    </div>
+
+                    <div className="description text-light mt-4">
+                        <h3> Start Streming On {movie ? movie.first_air_date : movie.release_date}</h3>
+                        <p>
+                            {movie ? movie.overview : ""}
+                        </p>
+                    </div>
+                </div>
+                <div className="col-lg-4 d-flex justify-content-end">
+                    <div className="poster-card rounded shadow">
+                        <img width={'100%'} src={movie ? TMDB_IMAGE_URL + movie.poster_path : ""} alt={movie ? movie.name : movie.original_name} />
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    )
+}
+
+export default Banner;

@@ -1,0 +1,31 @@
+
+.footer{
+    width: 100%;
+    min-height: 50vh;
+}
+
+.footer-row{
+    width: 100%;
+    min-height: 50vh;
+    background: linear-gradient(250deg,#000000b0, rgba(0, 0, 0, 0.926),#111);
+}
+
+.footer-title{
+    color: white;
+    font-weight: bolder;
+}
+.social-icons span{
+    color: rgb(255, 255, 255);
+    padding: .5rem;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.426);
+    border-radius: 2px;
+}
+.social-icons span:hover{
+    background: rgba(0, 0, 0, 0.424);
+    transition: 400ms;
+    color: rgb(255, 255, 255);
+}
+/* .post-footer{
+    background: rgba(16, 16, 16, 1);
+} */

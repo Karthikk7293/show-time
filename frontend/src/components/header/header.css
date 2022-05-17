@@ -1,0 +1,62 @@
+.notification-container{
+    color:white;
+    font-size:1.2rem;
+}
+.dropdown-toggle::after{
+    display: none;
+}
+.notifications{
+    display: flex;
+    position: relative;
+}
+.notifications .notify{
+    top: .1rem;
+    left: .6rem;
+    height: .5rem;
+    width: .5rem;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+}
+.navbar-nav .dropdown-menu {
+    height: auto;
+    width: 13rem;
+    top: 3rem;
+    left: -2rem;
+    border: none;
+    background: rgba(255, 255, 255, 0.202);
+}
+.dropdown-item{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    font-size: .8rem;
+    font-weight: 600;
+    color: rgb(47, 42, 42);
+    background: rgba(255, 255, 255, 0.474);
+    text-overflow: clip;
+    text-transform: uppercase;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.dropdown-item:hover{
+    background: rgba(121, 121, 121, 0.778);
+}
+.dropdown-item span{
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    font-weight: normal;
+    text-overflow: clip;
+    text-transform: lowercase;
+}
+.nav-elements,.login,.signup{
+    font-size: .9rem;
+    font-weight: normal;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+.navbar-nav{
+    flex-direction: rowk;
+}

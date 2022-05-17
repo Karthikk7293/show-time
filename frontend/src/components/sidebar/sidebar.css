@@ -1,0 +1,37 @@
+.profile {
+    background: rgba(168, 194, 255, 0.1);
+    border-radius: 5px;
+    color: white;
+    font-family: sans-serif;
+    font-weight: lighter;
+    box-shadow: rgb(255 254 254 / 0%) 10px 4px 6px -1px, rgb(255 255 255) 2px 2px 4px -1px;
+}
+.profile input{
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+}
+.profile span{
+    cursor: pointer;
+}
+.profile-img img{
+    border-radius: 50%;
+    border: 1px solid rgb(69, 69, 69);
+}
+.profile-submit input{
+    background: rgb(0, 93, 139);
+    border: none;
+    outline: none;
+    color: white;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+.edit-profile-pic{
+width: fit-content; 
+}
+.edit-profile-pic p{
+    margin-top: -2rem;
+    padding-left: 5rem;
+    cursor: pointer;
+}

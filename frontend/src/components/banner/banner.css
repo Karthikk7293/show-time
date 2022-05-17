@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.banner{
+    width: 100%;
+    height: fit-content;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.buttons button{
+    width: 8rem;
+    height: 2.5rem;
+    background: rgba(124, 124, 124, 0.4);
+    border: none;
+    outline: none;
+    color: #fff;
+    align-items: center;
+}
+.buttons button ion-icon{
+    font-size: 13px;
+    font-weight:bolder;
+}
+
+.buttons button:hover{
+    color: #111;
+    background: #e6e6e6e6;
+}
+
+.banner-row{
+    position: relative;
+  min-height: 70vh;
+    background: linear-gradient(180deg,transparent, rgba(0, 0, 0, 0.726),#111);
+}
+.poster-card{
+    position: absolute;
+    margin-top: 13rem;
+    height: 17rem;
+    width: 12rem;
+    background: #000;
+    overflow: hidden;
+}

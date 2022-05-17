@@ -1,0 +1,8 @@
+.user-img img{
+    border-radius: 50%;
+    width: 50px;
+    border: 1px solid whitesmoke;
+}
+.show-more-button{
+margin-top: -5rem;
+}
