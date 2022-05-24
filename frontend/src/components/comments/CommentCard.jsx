@@ -35,7 +35,7 @@ function CommentCard() {
             <div className='text-center text-white m-0 p-0'>
                 <div className="">
                    
-                    {hide ? <p>show less</p> : <p>show more</p>}
+                    {hide ? <p className='p-0 m-0'>show less</p> : <p className='p-0 m-0'>show more</p>}
                 <ExpandMore
                 
                     className="text-white show-more-button "
@@ -50,7 +50,7 @@ function CommentCard() {
                 </div>
                
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <div className="comment d-flex justify-content-between">
+                    <div className="comment d-flex justify-content-between m-0 p-0">
                         <div className="user-img">
                                <Avatar image ={"https://cdn.imgbin.com/6/25/24/imgbin-user-profile-computer-icons-user-interface-mystique-aBhn3R8cmqmP4ECky4DA3V88y.jpg"}/>
                         </div>

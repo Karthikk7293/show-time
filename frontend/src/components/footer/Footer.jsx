@@ -7,8 +7,8 @@ function Footer() {
     <div>
     <Container className='mx-0 p-0 mt-5 footer' style={{ backgroundRepeat: "no-repeat", backgroundSize: "cover", background: "url(https://movies-b26f.kxcdn.com/wp-content/uploads/2014/11/interstellar-poster-3-580x267.jpg)" }} fluid>
       <Row className='footer-row m-0 p-0' >
-        <Col lg={6} className=" text-white p-5">
-          <h1 className='footer-title mx-auto'>HD P<span className='text-warning'><ion-icon name="at-circle-sharp"></ion-icon></span>PC<span>O</span>RN</h1>
+        <Col lg={5} className=" text-white p-5">
+        <p  className='mx-2 my-auto'><img width={'100'} src="https://logodownload.org/wp-content/uploads/2021/05/showtime-logo-1.png" alt="" /></p>
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis sapiente rerum fugiat voluptatum nostrum harum fuga? Veniam vitae reiciendis excepturi, reprehenderit praesentium earum deserunt provident totam, hic natus, voluptatem harum.
           </p>
           <div className="social-icons">

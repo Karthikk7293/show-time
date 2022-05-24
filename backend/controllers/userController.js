@@ -1,3 +1,4 @@
+import cloudinary from 'cloudinary'
 import ErrorHandler from "../Utils/ErrorHandler.js";
 import CatchAsyncError from "../middleware/CatchAsyncError.js";
 import User from '../models/userModel.js'
@@ -33,10 +34,77 @@ const userRegister = CatchAsyncError(async(req,res,next)=>{
 })
 
 const logout = CatchAsyncError( async(req,res,next)=>{
-    res.cookie("token",null,{
+    console.log("------------");
+    res.status(201).cookie("token",null,{
         expires:new Date(Date.now()),
         httpOnly:true,
+    }).json({
+        success:true,
     })
 })
 
-export {userLogin,userRegister,logout};
+const updateProfile  = CatchAsyncError( async (req,res)=>{
+    // console.log(req.user);
+    const newUserData = {
+        name: req.body.name || req.user.name,
+        email: req.body.email || req.user.email
+      };
+    
+      if (req.body.image !== "") {
+          
+        const user = await User.findById(req.user.id);
+    
+        const imageId = user.avatar.public_id;
+       
+            await cloudinary.v2.uploader.destroy(imageId);
+    
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+          folder: "users-avatars",
+          width: 150,
+          crop: "scale",
+        })
+    
+        newUserData.avatar = {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        };
+      }else{
+
+          console.log(req.body.image);
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+            folder: "users-avatars",
+            width: 150,
+            crop: "scale",
+          })
+
+          newUserData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+          };
+
+      }
+    
+      const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      });
+      res.status(200).json({
+        success: true,
+        user
+        
+      });
+
+
+    })
+
+    const getUserDetails = CatchAsyncError(async(req,res)=>{
+        const user = User.findById(req.user.id)
+        if(!user) return next(new ErrorHandler("oops! user not found",404))
+
+        res.status(201).json({
+            user
+        })
+    })
+
+export {userLogin,userRegister,logout,updateProfile,getUserDetails};

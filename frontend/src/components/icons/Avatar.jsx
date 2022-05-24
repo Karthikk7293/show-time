@@ -39,6 +39,7 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 export default function profilePic({image,badge}) {
+  
   return (
       <>
       {badge ? (<StyledBadge

@@ -12,7 +12,7 @@ function HomeScreen() {
     
     return (
         <>
-            <Header />
+           <Header/>
             <Container className='py-5' fluid>
                 <Row>
                     <Banner  />
@@ -44,7 +44,7 @@ function HomeScreen() {
 
                 </Row>
             </Container>
-            <Footer />
+            <Footer/>
         </>
     )
 }

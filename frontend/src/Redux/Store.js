@@ -10,7 +10,7 @@ user:userReducer,
 
 let initialState = {
     userData: {
-        user: localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : {}
+        user: localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null
 }
 }
 

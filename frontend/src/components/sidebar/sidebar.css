@@ -5,6 +5,8 @@
     font-family: sans-serif;
     font-weight: lighter;
     box-shadow: rgb(255 254 254 / 0%) 10px 4px 6px -1px, rgb(255 255 255) 2px 2px 4px -1px;
+    position: sticky;
+    
 }
 .profile input{
     background: none;
@@ -31,7 +33,11 @@
 width: fit-content; 
 }
 .edit-profile-pic p{
-    margin-top: -2rem;
-    padding-left: 5rem;
+    margin-top: -1rem;
+    padding-left: 6rem;
     cursor: pointer;
+}
+.profile-sidebar{
+    position: sticky;
+    top: 6rem;
 }

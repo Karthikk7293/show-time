@@ -8,6 +8,9 @@ import SignupScreen from './pages/SignupScreen';
 import WatchVideoScreen from './pages/WatchVideoScreen'
 import UserProfileScreen from './pages/UserProfileScreen'
 import './App.css';
+import Dashboard from './pages/Dashboard';
+import UserDashboardLayout from './components/layouts/UserDashboardLayout';
+import SingleVideoScreen from './pages/SingleVideoScreen';
 
 function App() {
   return (
@@ -19,9 +22,15 @@ function App() {
       <Route path='/login' element={<LoginScreen/>}/>
       <Route path='/signup' element={<SignupScreen/>}/>
       <Route path='/watch/video' element={<WatchVideoScreen/>}/>
+      
       <Route path='/user/profile' element={<UserProfileScreen/>}/>
+      <Route path='/user/dashboard' element={<Dashboard/>}/>
+
+      <Route path='/content/single' element={<SingleVideoScreen/>}/>
+      
       
     </Routes>
+  
     </BrowserRouter>
     </div>
     

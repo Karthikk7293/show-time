@@ -6,6 +6,7 @@ import axios from '../TMDB/Axios';
 import { TMDB_API_KEY, TMDB_IMAGE_URL } from '../TMDB/TMDB_CONSTANTS';
 
 import './banner.css'
+import { LANDING_BANNER } from '../../assets/icons';
 
 function Banner() {
 
@@ -23,19 +24,12 @@ function Banner() {
     }, []);
 
     return (
-        <div style={{ backgroundImage: `url(${movie ? TMDB_IMAGE_URL + movie.backdrop_path : "http://image.tmdb.org/t/p/w500/wrhLyiY7ksW0fQCqNpa52qiOAH8.jpg"})` }}
+        <div style={{ backgroundImage: `url(${movie ? TMDB_IMAGE_URL + movie.backdrop_path :LANDING_BANNER})` }}
             // background:url(http://image.tmdb.org/t/p/w500/wrhLyiY7ksW0fQCqNpa52qiOAH8.jpg)
             className="conatainer-fluid banner m-0 p-0" >
             <div className="banner-row pt-5 d-flex justify-content-around">
                 <div className="col-lg-6 ps-4 pt-5">
-                    <div className="buttons">
-                        <button className="play rounded m-1">
-                            <ion-icon name="play"></ion-icon> <span>VIEW</span>
-                        </button>
-                        <button className="my-list rounded m-1">
-                            <ion-icon name="add"></ion-icon><span> HOME</span>
-                        </button>
-                    </div>
+                  
                     <div className="title text-light">
 
                         <h1 className='text-uppercase '>{movie && movie ? movie.original_title : movie.original_name ? movie.name : ""} </h1>

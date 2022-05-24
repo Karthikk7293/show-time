@@ -1,0 +1,104 @@
+.user-dashboard-banner .profile-image{
+    width: 10rem;
+    border-radius: 50%;
+    top: 5.5rem;
+    left: 3rem;
+
+   
+}
+.user-dashboard-banner .banner-image{
+    width: 80%;
+    height: 10rem;
+    -webkit-box-shadow: 5px 5px 3px -2px rgba(255, 255, 255, 0.12); 
+box-shadow: 5px 5px 3px -2px rgba(255, 255, 255, 0.12);
+}
+a{
+    text-decoration:none
+    
+}
+
+.navigate-to-dashboard-link{
+    /* button link */
+    position: relative;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    background: white;
+    padding: 10px 30px;
+    transition: .5s;
+}
+.navigate-to-dashboard-link:hover{
+    background: white;
+    box-shadow: 0 0 35px red;
+    color: red;
+}
+.navigate-to-dashboard-link::before{
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: black;
+}
+.navigate-to-dashboard-link span{
+    position: relative;
+    z-index: 1;
+}
+.navigate-to-dashboard-link i{
+    position: absolute;
+    inset: 0;
+    display: block;
+}
+.navigate-to-dashboard-link i::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 90%;
+    width: 12px;
+    height: 3px;
+    background: #000;
+    transform: translateX(-50%) skewX(325deg);
+    transition: .5s;
+}
+.navigate-to-dashboard-link:hover i::before{
+    width: 90px;
+    left: 40%;
+}
+.navigate-to-dashboard-link i:after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 12px;
+    height: 3px;
+    background: #000;
+    transform: translateX(-50%) skewX(325deg);
+    transition: .5s;
+}
+.navigate-to-dashboard-link:hover i::after{
+    width: 90px;
+    left: 60%;
+}
+
+
+
+
+
+
+
+
+.input-tag input{
+    outline: none;
+    border: none;
+    background: transparent;
+    color: white;
+
+}
+.input-tag input[type="submit"]{
+    margin-left: -6rem;
+}
+.input-tag span{
+    cursor: pointer;
+}

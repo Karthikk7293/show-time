@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../Redux/User/Actions/userActions';
 
 import './signup.css'
+import Loader from '../icons/Loader';
 
 function Signup() {
 
@@ -60,9 +61,7 @@ if (isAuthenticated) {
                     <Link to={'/'}><ion-icon name="close-outline"></ion-icon></Link>
                 </div>
                 <div className="row login-row py-5">
-                    <div className="col-lg-12  my-2   mx-auto text-center">
-                        {loading? <div className="spinner-border text-white mx-auto" role="status"/> :""}
-                    </div>
+                   {loading ? <Loader/> : "" } 
 
                     <div className="col-lg-12  my-2  px-4  mx-auto text-center">
                         <input className='py-2 px-2 w-100' type="text" placeholder='name'

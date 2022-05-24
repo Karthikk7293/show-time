@@ -10,8 +10,18 @@ import {
 
     USER_LOGOUT_SUCCESS,
     USER_LOGOUT_FAIL,
+
+    USER_UPDATE_PROFILE_REQUEST,
+    USER_UPDATE_PROFILE_SUCCESS,
+    USER_UPDATE_PROFILE_FAIL,
+
+    LOAD_USER_REQUEST,
+    LOAD_USER_SUCCESS,
+    LOAD_USER_FAIL,
+
 } from '../Constants/userConstants'
 
+// login user
 
 export const loginUser = (userData) => async (dispatch,getState) => {
     try {
@@ -34,17 +44,25 @@ export const loginUser = (userData) => async (dispatch,getState) => {
     }
 }
 
+//logout user
+
 export const logoutUser = () => async (dispatch) =>{
     try {
-
-        await axios.get('/api/user/logout')
+        const config = {
+            headers: {
+                "Content-Type": 'application/json'
+            }
+        }
+        await axios.get('/api/user/logout',config)
         dispatch({type: USER_LOGOUT_SUCCESS})
+        localStorage.removeItem("userData");
         
     } catch (error) {
-        
         dispatch({type: USER_LOGOUT_FAIL,payload:error.data.response.error})
     }
 }
+
+//  register user
 
 export const registerUser = (userData) => async (dispatch,getState) => {
     try {
@@ -70,3 +88,37 @@ export const registerUser = (userData) => async (dispatch,getState) => {
     }
 }
 
+// Load User
+
+export const loadUser = () => async (dispatch) => {
+    try {
+      dispatch({ type: LOAD_USER_REQUEST });
+  
+      const { data } = await axios.get(`/api/user/load`);
+  
+      dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+    } catch (error) {
+      dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    }
+  };
+
+
+// Update Profile
+
+export const updateProfile = (userData) => async (dispatch) => {
+    try {
+      dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
+  
+      const config = { headers: { "Content-Type": 'application/json' } };
+
+      const { data } = await axios.put("/api/user/update", userData,config);
+      console.log(data);
+  
+      dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data.user });
+    } catch (error) {
+      dispatch({
+        type: USER_UPDATE_PROFILE_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
