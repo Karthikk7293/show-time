@@ -10,12 +10,14 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import './header.css'
 import SearchBar from '../search/SearchBar';
 import ProfilePic from '../avatar/ProfilePic';
 import Notification from '../avatar/Notification';
 import { LOGO } from '../../assets/icons';
+import { useSelector } from 'react-redux';
 
 const pages = ['home', 'live', 'saved videos'];
 
@@ -26,6 +28,9 @@ function Header() {
     const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
+
+    const { loader } = useSelector((state) => state.loadingComponent)
+    console.log(loader,"========================");
 
     useEffect(() => {
         let userData = localStorage.getItem("userData")
@@ -118,7 +123,9 @@ function Header() {
                         </>)}
                     </Toolbar>
                 </Container>
+                {loader && <LinearProgress />}
             </AppBar>
+
         </div>
     )
 }

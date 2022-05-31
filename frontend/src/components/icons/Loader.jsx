@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Loader() {
+function Loader({color}) {
   return (
-    <div className="col-lg-12  my-2   mx-auto text-center">
-                         <div className="spinner-border text-white mx-auto" role="status"/>
+    <div className={`${color ? " m-0 p-0 col-lg-0 my-auto" : "col-lg-12  my-2   mx-auto text-center"}`}>
+                         <div className={`spinner-border  ${color ? "text-primary py-auto" : "text-white mx-auto"} " role="status`}/>
                     </div>
   )
 }

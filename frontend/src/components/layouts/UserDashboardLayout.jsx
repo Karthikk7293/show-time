@@ -9,7 +9,6 @@ import { CHANNER_BANNER, USER_AVATAR } from '../../assets/icons'
 import Sidebar from '../sidebar/Sidebar'
 
 function UserDashboardLayout({ children }) {
-    console.log(children.props.children);
     const [edit, setEdit] = useState(false);
     const [user, setUser] = useState(null)
     const [channel, setChannel] = useState({ banner: "", avatar: "", channel_name: "" })
@@ -69,9 +68,9 @@ function UserDashboardLayout({ children }) {
                                 </div>}
                         </div>
                         <div className="navigate-to-dashboard text-uppercase   me-5">
-                            <Link to={'/user/dashboard'} className="navigate-to-dashboard-link  px-4 py-2 ">
+                            <Link to={'/content/upload/video'} className="navigate-to-dashboard-link  px-4 py-2 ">
 
-                                <span> dashboard</span><i></i>
+                                <span> upload videos</span><i></i>
                             </Link>
                         </div>
                     </Col>

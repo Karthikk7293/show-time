@@ -1,0 +1,33 @@
+
+
+
+.img-0 {
+    width: 200px;
+    height: 100%;
+    object-fit: cover;
+    transition: 500ms ease-in-out transform;
+}
+.movie-top {
+    display: flex;
+    width: 100%;
+}
+.movie-info-container {
+    width: 100%;
+}
+
+.movie-info {
+    width: 100%;
+}
+
+.css-sox5kk-MuiBackdrop-root{
+background: rgba(0, 0, 0, 0.059) !important;
+}
+
+.movie-info-container:hover .img-2 .img-0 {
+    transform: scale(1.1);
+}
+
+.css-1arijsr-MuiSnackbar-root{
+    top: 5rem !important;
+    
+}

@@ -1,17 +1,18 @@
 import {createStore, combineReducers,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk';
 import {composeWithDevTools } from "redux-devtools-extension"
-import { userReducer } from './User/Reducers/userReducer';
+import { loadingReducer, userReducer } from './User/Reducers/userReducer';
+import { movieReducer } from './User/Reducers/ContentReducer';
 
 
 const reducer = combineReducers({
 user:userReducer,
+loadingComponent:loadingReducer,
+movie:movieReducer,
 })
 
 let initialState = {
-    userData: {
-        user: localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null
-}
+    user: {}
 }
 
 const middleWare = [thunk];

@@ -18,6 +18,8 @@ import {
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
+    lOADING_COMPONENT_START,
+    LOADING_COMPONENT_STOP,
 
 } from '../Constants/userConstants'
 
@@ -26,15 +28,19 @@ import {
 export const loginUser = (userData) => async (dispatch,getState) => {
     try {
         dispatch({ type: USER_LOGIN_REQUEST })
+        dispatch({type:lOADING_COMPONENT_START})
         const config = {
             headers: {
                 "Content-Type": "application/json"
             }
         }
-        console.log(userData);
         const { data } = await axios.post('/api/user/login', userData, config);
+
+        // console.log(data.user);
+
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data.user })
-        localStorage.setItem("userData", JSON.stringify(data.user));
+        dispatch({type:LOADING_COMPONENT_STOP})
+        localStorage.setItem("userData", JSON.stringify(getState().user.userData));
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
@@ -105,16 +111,18 @@ export const loadUser = () => async (dispatch) => {
 
 // Update Profile
 
-export const updateProfile = (userData) => async (dispatch) => {
+export const updateProfile = (userData) => async (dispatch,getState) => {
     try {
       dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
+      dispatch({type:lOADING_COMPONENT_START})
   
       const config = { headers: { "Content-Type": 'application/json' } };
 
       const { data } = await axios.put("/api/user/update", userData,config);
       console.log(data);
-  
+      dispatch({type:LOADING_COMPONENT_STOP})
       dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data.user });
+      localStorage.setItem("userData", JSON.stringify(getState().user.userData));
     } catch (error) {
       dispatch({
         type: USER_UPDATE_PROFILE_FAIL,

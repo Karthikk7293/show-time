@@ -34,7 +34,6 @@ const userRegister = CatchAsyncError(async(req,res,next)=>{
 })
 
 const logout = CatchAsyncError( async(req,res,next)=>{
-    console.log("------------");
     res.status(201).cookie("token",null,{
         expires:new Date(Date.now()),
         httpOnly:true,

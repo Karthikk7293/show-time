@@ -1,7 +1,80 @@
-.my-saved-videos ,.profile-sidebar{
+.my-saved-videos ,.profile-sidebar,.video-content-body,
+.all-subscribers-main,.advertisement-main-screen,.upload-video-main,
+.select-movie-main{
     background: rgba(168, 194, 255, 0.1);
     border-radius: 5px;
 }
-.video-content-body{
-    background: rgba(168, 194, 255, 0.1);
+.advertisement-main-screen-sub{
+  overflow-y: scroll;
+  height: 40rem;
 }
+
+.advertisement-main-screen-sub::-webkit-scrollbar {
+    width: .1em;
+  }
+   
+  .advertisement-main-screen-sub::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+  }
+   
+  .advertisement-main-screen-sub::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+  .chat-room-container{
+    height: 32rem;
+    -webkit-box-shadow: inset 55px -38px 120px -6px rgba(0,0,0,0.59);
+-moz-box-shadow: inset 55px -38px 120px -6px rgba(0,0,0,0.59);
+box-shadow: inset 55px -38px 120px -6px rgba(0,0,0,0.59);
+  }
+  .chat-room-container p{
+    font-size: 10px;
+    font-style: italic;
+  }
+  .chat-message-input input{
+    background: none;
+    border: none;
+    outline: none;
+  }
+  .chat-sent-bar{
+    background: rgba(177, 236, 255, 0.176);
+    color: white;
+    
+  }
+  .upload-video-title-input input{
+    width: 80%;
+    outline: none;
+    background: transparent;
+    border: 1px solid rgb(137, 137, 137);
+    color: white;
+
+  }
+ 
+  .upload-video-description-input textarea{
+    background: transparent;
+    outline: none;
+    width: 80%;
+    border: 1px solid rgb(137, 137, 137);
+    color: white;
+  }
+  .single-button button{
+    border: none;
+    outline: none;
+    width: 12rem;
+    height: 3rem;
+    background: rgba(168, 194, 255, 0.1);
+    box-shadow: rgb(255 254 254 / 0%) 10px 4px 6px -1px, rgb(255 255 255) 2px 2px 4px -1px;
+  }
+
+  .select-movie-categories-list::-webkit-scrollbar {
+    width: .1rem;
+    display: none;
+  }
+
+  
+  .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root,
+  .Mui-focused ,.css-1d1r5q-MuiFormHelperText-root,
+  .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root, 
+  .css-1ptx2yq-MuiInputBase-root-MuiInput-root {
+    color: white !important;
+  }

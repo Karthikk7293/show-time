@@ -11,6 +11,10 @@ import './App.css';
 import Dashboard from './pages/Dashboard';
 import UserDashboardLayout from './components/layouts/UserDashboardLayout';
 import SingleVideoScreen from './pages/SingleVideoScreen';
+import AllSubscribers from './pages/AllSubscribers';
+import AdProviders from './pages/Advertisements';
+import UploadVideosSecreen from './pages/UploadVideosSecreen';
+import SelectMovieScreen from './pages/SelectMovieScreen';
 
 function App() {
   return (
@@ -27,6 +31,11 @@ function App() {
       <Route path='/user/dashboard' element={<Dashboard/>}/>
 
       <Route path='/content/single' element={<SingleVideoScreen/>}/>
+      <Route path='/content/all/subscribers' element={<AllSubscribers/>}/>
+      <Route path='/content/ad-providers' element={<AdProviders/>}/>
+      <Route path='/content/upload/video' element={<UploadVideosSecreen/>}/>
+      <Route path='/content/select-movie' element={<SelectMovieScreen/>}/>
+      
       
       
     </Routes>

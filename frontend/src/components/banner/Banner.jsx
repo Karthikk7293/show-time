@@ -11,6 +11,7 @@ import { LANDING_BANNER } from '../../assets/icons';
 function Banner() {
 
     const [movie, setMovie] = useState('');
+    
     const options = {
         value: movie.vote_average,
         readOnly: true, 
@@ -18,10 +19,11 @@ function Banner() {
       };
 
     useEffect(() => {
+        
         axios.get(`trending/all/day?api_key=${TMDB_API_KEY}`).then((response) => {
             setMovie(response.data.results.sort(() => { return 0.5 - Math.random() })[0])
         })
-    }, []);
+    },[]);
 
     return (
         <div style={{ backgroundImage: `url(${movie ? TMDB_IMAGE_URL + movie.backdrop_path :LANDING_BANNER})` }}
@@ -44,7 +46,7 @@ function Banner() {
                     </div>
                 </div>
                 <div className="col-lg-4 d-flex justify-content-end">
-                    <div className="poster-card rounded shadow">
+                    <div className="poster-card rounded shadow col-d-none d-lg-block">
                         <img width={'100%'} src={movie ? TMDB_IMAGE_URL + movie.poster_path : ""} alt={movie ? movie.name : movie.original_name} />
                     </div>
                 </div>

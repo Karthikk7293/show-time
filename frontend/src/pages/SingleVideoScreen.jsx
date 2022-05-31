@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import CommentCard from '../components/comments/CommentCard';
 import UserDashboardLayout from '../components/layouts/UserDashboardLayout'
 import MovieCard from '../components/movieCard/MovieCard'
+import AdCard from '../components/adCard/AdCard'
 
 function SingleVideoScreen() {
     const [content, setContent] = useState({ title: "title", videoFile: "link", adDetails: "another link" });
@@ -67,12 +68,13 @@ function SingleVideoScreen() {
 
                 </Col>
                 <Col lg={8} className="video-content-body pt-3">
+                    <p className='text-white h4 text-bold px-3'>ADVERTIZEMENTS</p>
                     <Row>
                         <Col lg={6}>
-                            
+                            <AdCard/>
                         </Col>
                         <Col lg={6}>
-                            <MovieCard />
+                        <AdCard/>
                         </Col>
                         <Col lg={10} className="mx-auto my-3 ">
                             <div className="comments">

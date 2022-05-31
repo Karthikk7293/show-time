@@ -29,8 +29,7 @@ function Sidebar({ admin }) {
     },20000)
   }
 
-  const { loading, error, user, isAuthenticated, update } = useSelector((state) => state.user);
-  console.log(user);
+  const { loading, error, userData, isAuthenticated, update } = useSelector((state) => state.user);
 
 
   const [profile, setProfile] = useState({ name: "", email: "" });
@@ -47,7 +46,7 @@ function Sidebar({ admin }) {
       navigate("/login")
     }
 
-  }, [navigate])
+  }, [navigate,update])
 
 
 
@@ -64,11 +63,7 @@ function Sidebar({ admin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const myForm = new FormData();
-    myForm.set("name", profile.name)
-    myForm.set("email", profile.password)
-    myForm.append("avatar", image);
-    console.log(myForm);
+   
     const data = { name: profile.name, email: profile.email, image }
     dispatch(updateProfile(data))
 
@@ -77,7 +72,7 @@ function Sidebar({ admin }) {
   return (
     <div className=' profile-sidebar p-3 rounded'  >
       <div className={`profile-img text-center my-1 ${admin ? "d-none" : ""} `} >
-        {!image ? (<img width={150} src={user ? user.avatar.url : USER_AVATAR} alt="" />) : (<img width={150} src={image} alt="" />)}
+        {!image ? (<img width={150} src={data ? data.avatar.url : USER_AVATAR }  alt="" />) : (<img width={150} src={image ? image : USER_AVATAR} alt=""  />)}
 
         <div className="edit-profile-pic mx-auto">
           <FormControl
@@ -129,16 +124,17 @@ function Sidebar({ admin }) {
         </div>
         <div className="saved-videos email px-2  profile my-3 rounded">
 
-          <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white'>saved videos</p></Link>
+          <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white text-capitalize'>saved videos</p></Link>
         </div>
         <div className="subscribed-channels px-2 profile  my-3  rounded">
-         {admin ?  <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white'>subscribers</p></Link> : <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white'>subscribed</p></Link>}
+         {admin ?  <Link to={'/content/all/subscribers'} > <p className='m-0 my-2 py-2 text-white text-capitalize'>subscribers</p></Link> : 
+         <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white text-capitalize'>subscribed</p></Link>}
         </div>
         <div className="subscribed-channels px-2 profile  my-3  rounded">
-         {admin ?  <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white'>advertizements</p></Link> : ""}
+         {admin ?  <Link to={'/content/ad-providers'} > <p className='m-0 my-2 py-2 text-white text-capitalize'>advertizement proverders</p></Link> : ""}
         </div>
         <div className="subscribed-channels px-2 profile  my-3  rounded">
-         {admin ?  <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white'>payment details</p></Link> : ""}
+         {admin ?  <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white text-capitalize'>payment details</p></Link> : ""}
         </div>
         <div className="subscribed-channels px-2 profile  my-3  rounded">
          {admin ?  <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white'>chat</p></Link> : ""}

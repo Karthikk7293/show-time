@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './comments.css'
 import Avatar from '../../components/icons/Avatar'
+import { USER_AVATAR } from '../../assets/icons';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -20,7 +21,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-function CommentCard() {
+function CommentCard({content}) {
     const [expanded, setExpanded] = useState(false);
     const [hide, setHide] = useState(false)
 
@@ -50,13 +51,15 @@ function CommentCard() {
                 </div>
                
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <div className="comment d-flex justify-content-between m-0 p-0">
-                        <div className="user-img">
-                               <Avatar image ={"https://cdn.imgbin.com/6/25/24/imgbin-user-profile-computer-icons-user-interface-mystique-aBhn3R8cmqmP4ECky4DA3V88y.jpg"}/>
+                    <div className={content ? `comment d-flex m-0 py-0 px-3` : "comment d-flex justify-content-between m-0 p-0"}>
+                        <div className="user-img me-2">
+                               <Avatar image ={USER_AVATAR}/>
                         </div>
                         <div className="comment-content ms-2 overflow-hidden text-start">
                             <p className='m-0'>name</p>
-                            <p className='text-truncate'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit, ratione ducimus, magni aut nisi, provident sint veritatis fuga consectetur nobis illo quae? Porro sed asperiores excepturi rerum libero sapiente distinctio.</p>
+                           {!content ? <p className='text-truncate'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                           Fugit, ratione ducimus, magni aut nisi, provident sint veritatis fuga consectetur nobis illo quae? 
+                           Porro sed asperiores excepturi rerum libero sapiente distinctio.</p>  : <p>subscribed on : january 02 2021 </p>   } 
                         </div>
                     </div>
 

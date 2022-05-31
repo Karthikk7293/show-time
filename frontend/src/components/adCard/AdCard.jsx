@@ -15,20 +15,23 @@ function AdCard() {
     <CardMedia
         component="img"
         height="194"
-        image="http://farname.ir/upload/posts/1397-06/best_Advertisement_farname.jpg"
+        image="https://rukminim1.flixcart.com/image/416/416/jcc9ci80/poster/n/a/e/medium-pl-wthe-conjuring-movie-wide-wall-poster-19-13-inches-original-imaetdv7zpzfhddg.jpeg?q=70"
         alt="Paella dish"
     />
     </Link>
     <div className="p-2  rounded " >
-        <div className="d-flex justify-content-between p-1 ">
-            <h5 className='text-capitalize text-white'>sdfg</h5>
-            <p className="text-muted h6  ">September 14, 2016</p>
+        <div className=" p-1 ">
+            <h5 className='text-capitalize text-white'>Advertisement Provider</h5>
+            <div className="ad-provided_dates d-flex justify-content-between">
+            <p className="text-muted m-0 p-0">Start Date : September 14,2016</p>
+            <p className="text-muted m-0 p-0">End Date : September 14,2016</p>
+            </div>
         </div>
-        <p className='h6 m-0 p-0 text-white'>description</p>
-        <CardActions className='d-flex text-white justify-content-between'>
+        <p className='h6 m-0 p-0 text-white'>payment Dtails</p>
+        {/* <CardActions className='d-flex text-white justify-content-between'>
             <FavoriteIcon />
             
-        </CardActions>
+        </CardActions> */}
         
     </div>
 

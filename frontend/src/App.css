@@ -4,3 +4,12 @@
     min-height: 100vh;
     font-family: sans-serif;
 }
+body::-webkit-scrollbar {
+    width: .3em;
+  }
+   
+ 
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 0, 0);
+    outline: 1px solid rgb(0, 128, 255);
+  }
