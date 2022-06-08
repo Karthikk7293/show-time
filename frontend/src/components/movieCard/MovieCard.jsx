@@ -5,30 +5,27 @@ import CardActions from '@mui/material/CardActions';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 
-function MovieCard() {
-
-
+function MovieCard({video,count}) {
+console.log(count);
 
     return (
-        <Card sx={{ maxWidth: 280 }} className="bg-0 mx-auto"  style={{backgroundColor:"transparent"}} >
-            <Link to={'/content/single'}>
-            
+        <Card sx={{ maxWidth: 280 }} className="bg-0 mx-auto"  style={{backgroundColor:"transparent",minHeight:310}} >
+            <Link to={`/content/single/${video?._id}`}>
             <CardMedia
                 component="img"
                 height="194"
-                image="https://rukminim1.flixcart.com/image/416/416/jcc9ci80/poster/n/a/e/medium-pl-wthe-conjuring-movie-wide-wall-poster-19-13-inches-original-imaetdv7zpzfhddg.jpeg?q=70"
+                image={video?.thumbnail.url}
                 alt="Paella dish"
             />
-            </Link>
+            </Link> 
             <div className="p-2  rounded " >
                 <div className="d-flex justify-content-between p-1 ">
-                    <h5 className='text-capitalize text-white'>sdfg</h5>
-                    <p className="text-muted h6  ">September 14, 2016</p>
+                <p className='text-primary text-uppercase' style={{fontSize:"10px"}}>likes : <span className='text-white'>{video?.likes.lenght}</span> </p>
+                    <p className="text-muted " style={{fontSize:"10px"}}>September 14, 2016</p>
                 </div>
-                <p className='h6 m-0 p-0 text-white'>description</p>
-                <CardActions className='d-flex text-white justify-content-between'>
-                    <FavoriteIcon />  
-                </CardActions>
+                <h6 className='text-capitalize text-white'>{video?.title}</h6>
+                <p className='h6 m-0 p-0 text-white text-truncate' style={{fontSize:"12px",fontWeight:"300"}}>{video?.description}</p>
+
             </div>
         </Card>
     )

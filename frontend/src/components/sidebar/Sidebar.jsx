@@ -17,6 +17,7 @@ function Sidebar({ admin }) {
   const [showCropper, setShowCropper] = useState(false)
   const [cropImage, setCropImage] = useState(false)
   const [image, setImage] = useState(null)
+  const [thumbnail,setThumbnail] = useState(true)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,7 +35,6 @@ function Sidebar({ admin }) {
 
   const [profile, setProfile] = useState({ name: "", email: "" });
   const [data, setData] = useState("");
-
 
 
   useEffect(() => {
@@ -72,14 +72,13 @@ function Sidebar({ admin }) {
   return (
     <div className=' profile-sidebar p-3 rounded'  >
       <div className={`profile-img text-center my-1 ${admin ? "d-none" : ""} `} >
-        {!image ? (<img width={150} src={data ? data.avatar.url : USER_AVATAR }  alt="" />) : (<img width={150} src={image ? image : USER_AVATAR} alt=""  />)}
+        {!image ? (<img width={150} src={data.avatar ? data.avatar.url : USER_AVATAR }  alt="" />) : (<img width={150} src={image ? image : USER_AVATAR} alt=""  />)}
 
         <div className="edit-profile-pic mx-auto">
           <FormControl
-            className="crop_image d-none"
+            className=" d-none"
             id="upload_image"
             type="file"
-            name="crop_image"
             onChange={(e) => {
               setCropImage(e.target.files[0])
               setShowCropper(true)
@@ -94,6 +93,7 @@ function Sidebar({ admin }) {
       {loading ? <Loader /> : ""}
       {showCropper && (
         <CropImage
+        cropRatio={{width:500,height:500}}
           src={cropImage}
           imageCallback={(image) => {
             setImage(image)
@@ -107,7 +107,7 @@ function Sidebar({ admin }) {
 
       <div className="profile-body  ">
         <div className="saved-videos email px-2  profile my-3 rounded">
-          <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white '>Dash board</p></Link>
+          <Link to={'/user/dashboard'} > <p className='m-0 my-2 py-2 text-white  '>Dash board</p></Link>
         </div>
         <div className="name my-3 profile  px-2 rounded d-flex justify-content-between">
           {!name ? (<> <p className='m-0 my-2 ' >{data.name}</p> <span className='my-auto' onClick={(() => handleClick("name"))}><ion-icon name="create-outline"></ion-icon></span></>) :

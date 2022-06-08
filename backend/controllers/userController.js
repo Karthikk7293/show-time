@@ -2,7 +2,7 @@ import cloudinary from 'cloudinary'
 import ErrorHandler from "../Utils/ErrorHandler.js";
 import CatchAsyncError from "../middleware/CatchAsyncError.js";
 import User from '../models/userModel.js'
-import sendToken from "../Utils/jwtToken.js";
+import {sendTokenUser} from "../Utils/jwtToken.js";
 
 
 const userLogin = CatchAsyncError(async(req,res,next)=>{
@@ -17,7 +17,7 @@ const userLogin = CatchAsyncError(async(req,res,next)=>{
 
    if(!isPasswordMatched) return next(new ErrorHandler("Invalid Password",401))
 
-   sendToken(user,200,res)
+   sendTokenUser(user,200,res)
 
 });
 
@@ -30,7 +30,7 @@ const userRegister = CatchAsyncError(async(req,res,next)=>{
     if(!user) return next( new ErrorHandler("user not created",404))
 
 
-   sendToken(user,201,res);
+    sendTokenUser(user,201,res);
 })
 
 const logout = CatchAsyncError( async(req,res,next)=>{
@@ -43,19 +43,24 @@ const logout = CatchAsyncError( async(req,res,next)=>{
 })
 
 const updateProfile  = CatchAsyncError( async (req,res)=>{
-    // console.log(req.user);
+  // console.log(req.body);
     const newUserData = {
         name: req.body.name || req.user.name,
         email: req.body.email || req.user.email
       };
     
-      if (req.body.image !== "") {
-          
+      if (req.body.image !== null) {
+          // console.log("hai");
         const user = await User.findById(req.user.id);
     
         const imageId = user.avatar.public_id;
-       
-            await cloudinary.v2.uploader.destroy(imageId);
+
+
+       if(imageId) {
+        //  console.log();
+         await cloudinary.v2.uploader.destroy(imageId);
+       }
+            
     
         const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
           folder: "users-avatars",
@@ -69,7 +74,7 @@ const updateProfile  = CatchAsyncError( async (req,res)=>{
         };
       }else{
 
-          console.log(req.body.image);
+          // console.log(req.body.image);
         const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
             folder: "users-avatars",
             width: 150,

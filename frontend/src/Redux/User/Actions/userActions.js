@@ -40,7 +40,7 @@ export const loginUser = (userData) => async (dispatch,getState) => {
 
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data.user })
         dispatch({type:LOADING_COMPONENT_STOP})
-        localStorage.setItem("userData", JSON.stringify(getState().user.userData));
+        // localStorage.setItem("userData", JSON.stringify(getState().user.userData));  
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
@@ -82,13 +82,13 @@ export const registerUser = (userData) => async (dispatch,getState) => {
         const { data } = await axios.post("/api/user/register", userData, config);
         dispatch({ type: REGISTER_USER_SUCCESS, payload: data })
 
-        localStorage.setItem("userData", JSON.stringify(getState().userData.user));
+        // localStorage.setItem("userData", JSON.stringify(getState().user.userData));
 
     } catch (error) {
         console.log(error);
         dispatch({
             type: REGISTER_USER_FAIL,
-            payload: error.response.data.error
+            payload: error.response
         })
 
     }
@@ -122,7 +122,7 @@ export const updateProfile = (userData) => async (dispatch,getState) => {
       console.log(data);
       dispatch({type:LOADING_COMPONENT_STOP})
       dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data.user });
-      localStorage.setItem("userData", JSON.stringify(getState().user.userData));
+    //   localStorage.setItem("userData", JSON.stringify(getState().user.userData));
     } catch (error) {
       dispatch({
         type: USER_UPDATE_PROFILE_FAIL,

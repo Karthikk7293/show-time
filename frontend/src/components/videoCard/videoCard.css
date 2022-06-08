@@ -27,3 +27,19 @@ color: white;
 .subscibe-btns input:hover{
     background: rgb(116, 1, 1);
 }
+.icons i{ 
+    font-size: 15px !important;
+    font-weight: 300;
+
+}
+.icons p{
+    margin-top: .1rem;
+    font-weight: 400;
+    font-size: .9rem;
+}
+i{
+    cursor: pointer;
+}
+.like-button{
+    color: red;
+}

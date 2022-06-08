@@ -1,5 +1,6 @@
-import React from 'react';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import HomeScreen from './pages/HomeScreen';
 import ErrorScreen from './pages/ErrorScreen';
@@ -15,34 +16,58 @@ import AllSubscribers from './pages/AllSubscribers';
 import AdProviders from './pages/Advertisements';
 import UploadVideosSecreen from './pages/UploadVideosSecreen';
 import SelectMovieScreen from './pages/SelectMovieScreen';
+import A from './A'
+
+import AdminLoginScreen from './pages/Admin/AdminLoginScreen';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AllusersListScreen from './pages/Admin/AllusersListScreen';
 
 function App() {
+  const [isAuthenticated, setAuthenticated] = useState(null)
+  const { admin, loading } = useSelector((state) => state.admin)
+
+
+  useEffect(() => {
+    let user = localStorage.getItem("userData")
+    if (user) {
+      user = JSON.parse(user)
+      setAuthenticated(user)
+    }
+  }, [])
+
   return (
     <div className="main">
-<BrowserRouter>
-    <Routes>
-      <Route path='*' element={<ErrorScreen/>}/>
-      <Route path='/' element={<HomeScreen/>}/>
-      <Route path='/login' element={<LoginScreen/>}/>
-      <Route path='/signup' element={<SignupScreen/>}/>
-      <Route path='/watch/video' element={<WatchVideoScreen/>}/>
-      
-      <Route path='/user/profile' element={<UserProfileScreen/>}/>
-      <Route path='/user/dashboard' element={<Dashboard/>}/>
+      <BrowserRouter>
+        <Routes>
+          {/* user section */}
+          <Route path='*' element={<ErrorScreen />} />
+          <Route path='/' element={<HomeScreen />} />
+          <Route path='/login' element={!isAuthenticated && <LoginScreen />} />
+          <Route path='/signup' element={<SignupScreen />} />
+          <Route path='/watch/video/:id' element={isAuthenticated ? <WatchVideoScreen /> : <LoginScreen />} />
+          <Route path='/user/profile' element={<UserProfileScreen />} />
 
-      <Route path='/content/single' element={<SingleVideoScreen/>}/>
-      <Route path='/content/all/subscribers' element={<AllSubscribers/>}/>
-      <Route path='/content/ad-providers' element={<AdProviders/>}/>
-      <Route path='/content/upload/video' element={<UploadVideosSecreen/>}/>
-      <Route path='/content/select-movie' element={<SelectMovieScreen/>}/>
-      
-      
-      
-    </Routes>
-  
-    </BrowserRouter>
+          {/* content creator section */}
+          <Route path='/user/dashboard' element={isAuthenticated ? <Dashboard /> : <LoginScreen />} />
+          <Route path='/content/single/:contentId' element={isAuthenticated ? <SingleVideoScreen /> : <LoginScreen />} />
+          <Route path='/content/all/subscribers' element={isAuthenticated ? <AllSubscribers /> : <LoginScreen />} />
+          <Route path='/content/ad-providers' element={isAuthenticated ? <AdProviders /> : <LoginScreen />} />
+          <Route path='/content/upload/video' element={isAuthenticated ? <UploadVideosSecreen /> : <LoginScreen />} />
+          {/* <Route path='/content/upload/video' element={<A/>}/> */}
+          <Route path='/content/select-movie' element={isAuthenticated ? <SelectMovieScreen /> : <LoginScreen />} />
+
+          {/* admin section */}
+          <Route path='/admin/login' element={admin ? <AdminLoginScreen /> : <AdminDashboard />} />
+          <Route path='/admin/dashboard' element={admin === true ? <AdminDashboard /> : <AdminLoginScreen />} />
+          <Route path='/admin/allusers' element={admin === true ? <AllusersListScreen /> : <AdminLoginScreen />} />
+
+
+
+        </Routes>
+
+      </BrowserRouter>
     </div>
-    
+
   );
 }
 

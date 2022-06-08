@@ -17,3 +17,6 @@ color: #000000;
 .chat-message-card:hover{
     background: rgba(201, 218, 255, 0.427);
 }
+.rating-star{
+    color: rgb(183, 0, 0);
+}

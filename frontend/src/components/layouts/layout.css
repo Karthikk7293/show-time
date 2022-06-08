@@ -82,13 +82,6 @@ a{
     left: 60%;
 }
 
-
-
-
-
-
-
-
 .input-tag input{
     outline: none;
     border: none;
@@ -102,3 +95,11 @@ a{
 .input-tag span{
     cursor: pointer;
 }
+
+/* admin start  */
+.admin-main-container,.admin-sidebar{
+    background: rgba(168, 194, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* admin end */

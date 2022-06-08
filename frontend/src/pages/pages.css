@@ -78,3 +78,11 @@ box-shadow: inset 55px -38px 120px -6px rgba(0,0,0,0.59);
   .css-1ptx2yq-MuiInputBase-root-MuiInput-root {
     color: white !important;
   }
+
+  .upload-video-textarea::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .upload-thumbnail{
+    cursor: pointer;
+  }

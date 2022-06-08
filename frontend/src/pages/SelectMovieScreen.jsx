@@ -14,6 +14,7 @@ import SelectMovieSubScreen from '../components/selectMovie/SelectMovieSubScreen
 import './pages.css'
 import SelectedMovie from '../components/selectMovie/SelectedMovie';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 const currencies = [
    
     {
@@ -111,6 +112,10 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
                                     <Tab label="NOW PLAYING" className='bg-white text-primary rounded mx-2' />
                                 </Tabs>
                                 <div className="select-movie-button d-flex justify-content-between">
+                                <div className='my-auto'>
+                                       <Link to={'/content/upload/video'}> <button className='border-0   bg-danger text-white shadow-3 px-4 py-2 mx-4'>back </button></Link>
+                                       {movie && <SelectedMovie movieDtails={movieDetails} />}
+                                    </div>
                                     <div className=' mx-5 '>
                                         <TextField
                                             id="standard-select-currency"
@@ -129,11 +134,7 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
                                             ))}
                                         </TextField>
                                     </div>
-                                    <div>
-                                        {/* <button className='border-0   bg-danger text-white shadow-3 px-4 py-2 mx-4'>select movie</button> */}
-                                       {movie && <SelectedMovie movieDtails={movieDetails} />}
-                                    </div>
-                                    {/* <button className='border-0 px-3 py-2 bg-danger text-white shadow-3 mx-4'>select language</button> */}
+                                   
                                 </div>
                             </Box>
                            

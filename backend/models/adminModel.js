@@ -4,28 +4,11 @@ import JWT from 'jsonwebtoken';
 import CRYPTO from 'crypto'
 
 
-const userSchema = new mongoose.Schema({
+const adminSchema = new mongoose.Schema({
     name:{
         type:String,
-        required:[true,"Please Enter Your Name!"]
+        // required:[true,"Please Enter Your Name!"]
     },
-    channel:{
-        type:String,
-    },
-    banner:{
-        public_id: {
-            type: String,
-          },
-          url: {
-            type: String,
-          },
-    },
-    content: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Content",
-        },
-      ],
     email:{
         type:String,
         required:[true,"Please Enter Your Email!"],
@@ -36,12 +19,6 @@ const userSchema = new mongoose.Schema({
         required:[true,"Please Enter Your Password!"],
         minLength: [6, "Password should be greater than 8 characters"],
     },
-    subscribed:[
-        {
-           type: mongoose.Schema.ObjectId,
-           ref: "channel",
-        }
-    ],
     avatar: {
         public_id: {
           type: String,
@@ -50,10 +27,6 @@ const userSchema = new mongoose.Schema({
           type: String,
         },
       },
-    isBlocked:{
-        type:Boolean,
-        default:false,
-    },
     createdAt:{
         type:Date,
         default:Date.now,
@@ -63,7 +36,7 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpire:Date,
 })
 
-userSchema.pre("save",async function (next){
+adminSchema.pre("save",async function (next){
     if(!this.isModified("password")){
         next();
     }
@@ -73,7 +46,7 @@ userSchema.pre("save",async function (next){
 
 // JWT TOKEN
 
-userSchema.methods.getJWTToken = function (){
+adminSchema.methods.getJWTToken = function (){
     return JWT.sign({id:this._id},process.env.JWT_SECRET,{
         expiresIn:process.env.JWT_EXPIRE,
     });
@@ -81,21 +54,21 @@ userSchema.methods.getJWTToken = function (){
 
 // COMPARE PASSWORD
 
-userSchema.methods.comparePassword = async function(password){
+adminSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password,this.password);
 }
 
 
 // generating password reset token 
-userSchema.methods.getResetPasswordToken = function (){
+adminSchema.methods.getResetPasswordToken = function (){
     // generating token 
     const resetToken = CRYPTO.randomBytes(20).toString("hex");
 
     this.resetPasswordToken = CRYPTO.createHash("sha256").update(resetToken).digest("hex")
 
-    this.resetPasswordExpire = Date.now()+ 15*60*1000;
+    this.resetPasswordExpire = Date.now()+ 1*60*1000;
     return resetToken;
 }
   
 
-export default mongoose.model("User",userSchema);
+export default mongoose.model("Admin",adminSchema);

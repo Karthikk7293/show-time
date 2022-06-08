@@ -39,7 +39,7 @@ function UserProfileScreen() {
             </div>
             <Row>
 
-              <Col  lg={3}><SuggestionsCard profile /></Col>
+              <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>

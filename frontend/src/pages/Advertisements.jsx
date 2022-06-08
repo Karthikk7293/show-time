@@ -110,7 +110,7 @@ function AdProviders() {
                     </div>
                     <div className="chat-sent-bar  rounded  d-flex justify-content-between px-2 my-1 ">
                         <div className='chat-message-input my-auto '>
-                            <input type="text" className=' py-3  text-white'  placeholder="type something...."/>
+                            <input type="text" className=' py-3  text-white w-100'  placeholder="type something...."/>
                         </div>
                         <div className="sent-icon my-auto">
                         <FaTelegramPlane size={40}/>

@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import CommentCard from '../components/comments/CommentCard';
 import UserDashboardLayout from '../components/layouts/UserDashboardLayout'
 import MovieCard from '../components/movieCard/MovieCard'
 import AdCard from '../components/adCard/AdCard'
+import {getSingleContent} from '../Redux/User/Actions/contentActions'
 
 function SingleVideoScreen() {
+
     const [content, setContent] = useState({ title: "title", videoFile: "link", adDetails: "another link" });
     const [title, setTitle] = useState(false)
     const [video, setVideo] = useState(false)
     const [ad, setAd] = useState(false)
+    const params = useParams();
+    const dispatch = useDispatch()
+    console.log(params.contentId);
+
+    useEffect(() => {
+    dispatch(getSingleContent(params.contentId))
+    }, [dispatch])
+    
 
     if (title || video || ad) {
         setTimeout(() => {

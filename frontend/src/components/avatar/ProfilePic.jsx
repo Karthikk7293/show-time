@@ -54,7 +54,7 @@ useEffect(() => {
     <Box sx={{ flexGrow: 0 ,px:2 }}>
     <Tooltip title="Open settings">
         <IconButton className='text-uppercase' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt={user && user.name} src={user ? user.avatar.url : USER_AVATAR} />
+           {user &&  <Avatar alt={user && user.name} src={user.avatar ? user.avatar.url : USER_AVATAR} /> }  
         </IconButton>
     </Tooltip>
     <Menu

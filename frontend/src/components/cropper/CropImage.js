@@ -4,8 +4,8 @@ import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import { getCroppedImg } from './getCroppedImage'
 
-const CropImage = ({ src, imageCallback, closeHander }) => {
-
+const CropImage = ({cropRatio, src, imageCallback, closeHander }) => {
+ console.log(cropRatio);
   const cropperRef = useRef(null)
   const cropDetailsRef = useRef(null)
 
@@ -30,7 +30,7 @@ const CropImage = ({ src, imageCallback, closeHander }) => {
               className="image-fulid"
               style={{ height: '27rem', width: 'fit-content' }}
               // Cropper.js options
-              aspectRatio={500 / 500}
+              aspectRatio={ cropRatio.width/cropRatio.height }
               guides={false}
               crop={onCrop}
               ref={cropperRef}

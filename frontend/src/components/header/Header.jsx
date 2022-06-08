@@ -30,7 +30,9 @@ function Header() {
     const navigate = useNavigate();
 
     const { loader } = useSelector((state) => state.loadingComponent)
-    console.log(loader,"========================");
+
+    
+    // console.log(loader,"========================");
 
     useEffect(() => {
         let userData = localStorage.getItem("userData")
@@ -123,7 +125,7 @@ function Header() {
                         </>)}
                     </Toolbar>
                 </Container>
-                {loader && <LinearProgress />}
+                {/* {!loader && <LinearProgress />} */}
             </AppBar>
 
         </div>
