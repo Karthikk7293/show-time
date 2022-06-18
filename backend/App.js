@@ -3,9 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser'
 import fileUpload from 'express-fileupload'
-import cloudinary from 'cloudinary'
-// import multer from 'multer'
-// import fs from 'fs'
+import cookieParser from 'cookie-parser'
+import path from 'path'
+import fs from 'fs'
 
 // import and involking database connections
 import connectDatabase from "./config/dataBase.js";
@@ -19,7 +19,6 @@ import userRouter from './routes/userRouter.js';
 import adminRouter from './routes/adminRouter.js';
 import contentRouter from './routes/contentRouter.js';
 import adProviderRouter from './routes/adProviderRoutes.js'
-// import path from 'path'
 
 
 
@@ -30,6 +29,7 @@ const App = express();
 App.use(cors());
 App.use(bodyParser.urlencoded({extended:true,limit:"50mb"}))
 App.use(express.json({limit:"50mb"}));
+App.use(cookieParser())
 App.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
   }));
@@ -45,27 +45,22 @@ App.use("/api/ad-providers",adProviderRouter);
 
 
 
+const __dirname = path.resolve()
+App.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+if (process.env.NODE_ENV === 'production') {
+  App.use(express.static(path.join(__dirname, '/frontend/build')))
+
+  App.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  App.get('/', (req, res) => {
+    res.send('API is running....')
+  })
+}
 
 
-
-
-
-
-App.post('/api/content/video',async(req,res)=>{
-    // req.files.files.path="./uploads"
- console.log(req.files)
-    cloudinary.v2.uploader.upload(req.files, 
-    { resource_type: "video", 
-      public_id: "myfolder/mysubfolder/",
-      chunk_size: 6000000,
-      eager: [
-        { width: 300, height: 300, crop: "pad", audio_codec: "none" }, 
-        { width: 160, height: 100, crop: "crop", gravity: "south", audio_codec: "none" } ],                                   
-      eager_async: true,
-      eager_notification_url: "https://mysite.example.com/notify_endpoint" },
-    );
-  });
-// })
 
 // error handle middleware 
 App.use(errorMiddleWare)

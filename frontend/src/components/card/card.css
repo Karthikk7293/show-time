@@ -1,5 +1,5 @@
 .trending-card{
-    width:80% ;
+    max-width: 15rem;
     height: 375px;
 }
 .trending-card img{

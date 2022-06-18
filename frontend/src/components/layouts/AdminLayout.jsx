@@ -4,6 +4,7 @@ import Header from '../header/Header'
 import Footer from '../footer/Footer'
 
 import './layout.css'
+import AdminSidebar from '../sidebar/AdminSidebar'
 
 function AdminLayout({ children }) {
 
@@ -12,10 +13,10 @@ function AdminLayout({ children }) {
             <Header admin />
             <Container style={{ minHeight: "90vh" }} fluid>
                 <Row className='px-3'>
-                    <Col className='admin-sidebar  shadow' lg={3}>
-                        <h1>hai</h1>
+                    <Col className='' lg={3}>
+                        <AdminSidebar/>
                     </Col>
-                    <Col className='admin-main-container  shadow mx-auto p-3' lg={9}>
+                    <Col className='  shadow mx-auto' lg={9}>
                         {children}
                     </Col>
                 </Row>

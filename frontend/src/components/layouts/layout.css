@@ -1,14 +1,15 @@
 .user-dashboard-banner .profile-image{
     width: 10rem;
     border-radius: 50%;
-    top: 5.5rem;
+    top: 8rem;
     left: 3rem;
-
+    padding: 5px;
+    border: 1px solid red;
    
 }
 .user-dashboard-banner .banner-image{
     width: 80%;
-    height: 10rem;
+    /* height: 170px; */
     -webkit-box-shadow: 5px 5px 3px -2px rgba(255, 255, 255, 0.12); 
 box-shadow: 5px 5px 3px -2px rgba(255, 255, 255, 0.12);
 }

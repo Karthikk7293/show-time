@@ -1,8 +1,8 @@
 import {createStore, combineReducers,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk';
 import {composeWithDevTools } from "redux-devtools-extension"
-import { loadingReducer, userReducer } from './User/Reducers/userReducer';
-import { contentReducer, movieReducer, singleContentReducer } from './User/Reducers/ContentReducer';
+import { loadingReducer, saveVideoReducer, userReducer } from './User/Reducers/userReducer';
+import { channelReducer, contentReducer, movieReducer, popularContentsReducer, singleContentReducer } from './User/Reducers/ContentReducer';
 import { adminReducer, allUsersReducer } from './User/Reducers/adminReducer';
 
 
@@ -13,14 +13,17 @@ movie:movieReducer,
 admin:adminReducer,
 users:allUsersReducer,
 content:contentReducer,
-singleContent:singleContentReducer
+singleContent:singleContentReducer,
+popularContents:popularContentsReducer,
+channelDetails:channelReducer,
+savedVideos:saveVideoReducer
 })
 
 let initialState = {
-    user: {userDetails :localStorage.getItem("userData")
+    user: {userData :localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
     : {}},
-    admin:{adminDetails :localStorage.getItem("adminData")
+    admin:{adminData :localStorage.getItem("adminData")
     ? JSON.parse(localStorage.getItem("adminrData"))
     : {}}
 }

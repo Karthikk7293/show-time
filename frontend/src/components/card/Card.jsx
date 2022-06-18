@@ -9,10 +9,11 @@ import { TMDB_IMAGE_URL } from '../TMDB/TMDB_CONSTANTS'
 function Card({content}) {
     return (
         <Col  lg={3}>
-            <div className="trending-card bg-light  m-2 px-2 text-center rounded shadow">
+            <div className="trending-card bg-light  my-3 text-center rounded shadow w-100" >
                 <p className='py-2 m-0'>{content && content.title}</p>
                 <Link to={`/watch/video/${content && content._id}`}>
-                <img width={"80%"} height={260} src={content ? TMDB_IMAGE_URL+content.movie.poster_path : CONTENT_POSETER} alt="" />
+                <img width={"75%"} height={260}  src={content ? TMDB_IMAGE_URL+content.movie.poster_path : CONTENT_POSETER} alt="" />
+                {/* <img width={"80%"} height={260} src={ CONTENT_POSETER} alt="" /> */}
                 </Link>
                 <div className="trending-card-body">
                     <div className="card-title text-uppercase mb-0 ">

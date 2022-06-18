@@ -3,6 +3,7 @@ import ErrorHandler from "../Utils/ErrorHandler.js";
 import CatchAsyncError from "../middleware/CatchAsyncError.js";
 import User from '../models/userModel.js'
 import {sendTokenUser} from "../Utils/jwtToken.js";
+import { uploadImageFile } from '../middleware/videoHandler.js';
 
 
 const userLogin = CatchAsyncError(async(req,res,next)=>{
@@ -34,7 +35,7 @@ const userRegister = CatchAsyncError(async(req,res,next)=>{
 })
 
 const logout = CatchAsyncError( async(req,res,next)=>{
-    res.status(201).cookie("token",null,{
+    res.status(201).cookie("userToken",null,{
         expires:new Date(Date.now()),
         httpOnly:true,
     }).json({
@@ -102,7 +103,7 @@ const updateProfile  = CatchAsyncError( async (req,res)=>{
 
     })
 
-    const getUserDetails = CatchAsyncError(async(req,res)=>{
+    const getUserDetails = CatchAsyncError(async(req,res,next)=>{
         const user = User.findById(req.user.id)
         if(!user) return next(new ErrorHandler("oops! user not found",404))
 
@@ -111,4 +112,93 @@ const updateProfile  = CatchAsyncError( async (req,res)=>{
         })
     })
 
-export {userLogin,userRegister,logout,updateProfile,getUserDetails};
+    const updateChannel = CatchAsyncError(async (req,res,next)=>{
+      try {
+
+        const {channel,about,image} = req.body;
+       let user = await User.findById(req.user._id)
+
+       let newUserData = {
+        name:  req.user.name,
+        email: req.user.email,
+        channel:channel,
+        about:about,
+
+       }
+       
+       if(user.banner.public_id && image){
+
+         await cloudinary.v2.uploader.destroy(user.banner.public_id)
+
+         const result = await uploadImageFile(image,"banner",next)
+         
+         newUserData.banner={
+          public_id: result.public_id,
+          url: result.secure_url
+         }
+      }else{
+        const result = await uploadImageFile(image,"banner",next)
+        newUserData.banner={
+         public_id: result.public_id,
+         url: result.secure_url
+        }
+      }
+
+       user =  await User.findByIdAndUpdate(req.user._id,newUserData,{ new: true,
+          runValidators: true,
+          useFindAndModify: false})
+       
+          res.status(200).json({
+            success:true,
+            user
+          })
+
+      } catch (error) {
+        res.status(500).json({
+          success:false,
+          error
+        })
+      }
+    })
+
+    const addSaveVideos = CatchAsyncError( async(req,res,next)=>{
+      try {
+        const user = await User.findById(req.user._id);
+
+    if (!user) return next(new ErrorHandler("Content not found !", 404))
+
+    if (user.savedVideos.includes(req.params.id)) {
+
+      const index = user.savedVideos.indexOf(req.params.id);
+
+      user.savedVideos.splice(index, 1);
+
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "already exist !",
+        user
+      });
+    } else {
+      user.savedVideos.push(req.user._id);
+
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "video added successfully !",
+        user
+      });
+    }
+
+        
+      } catch (error) {
+        res.status(500).json({
+          success:false,
+          error
+        })
+      }
+    })
+
+export {userLogin,userRegister,logout,updateProfile,getUserDetails,updateChannel,addSaveVideos};

@@ -19,12 +19,24 @@ import {
     SINGLE_CONTENT_REQUEST,
     SINGLE_CONTENT_SUCCESS,
     SINGLE_CONTENT_FAIL,
+    ADD_COMMENT_REQUEST,
+    ADD_COMMENT_SUCCESS,
+    ADD_COMMENT_FAIL,
+    GET_POPULAR_REVIEWS_REQUEST,
+    GET_POPULAR_REVIEWS_SUCCESS,
+    GET_POPULAR_REVIEWS_FAIL,
+    GET_SUGGEST_REVIEWS_REQUEST,
+    GET_SUGGEST_REVEIWS_SUCCESS,
+    GET_SUGGEST_REVIEWS_FAIL,
+    GET_CHANNEL_DETAILS_REQUEST,
+    GET_CHANNEL_DETAILS_SUCCESS,
+    GET_CHANNEL_DETAILS_FAIL,
 } from "../Constants/contentContansts"
 
 export const selectMovie = (movieDetails) => async (dispatch) => {
     try {
         dispatch({ type: CHOOSE_MOVIE_REQUEST })
-        console.log(movieDetails);
+        // console.log(movieDetails);
         dispatch({ type: CHOOSE_MOVIE_SUCCESS, payload: movieDetails })
 
     } catch (error) {
@@ -59,12 +71,12 @@ export const createContent = (contentDetails) => async (dispatch) => {
 
         const config = {
             headers: {
-                'Content-Type': "application/json"
+                'Content-Type': "multipart/form-data"
             }
         }
         const { data } = await axios.post('/api/content/create', contentDetails, config)
 
-        dispatch({ type: CREATE_CONTENT_SUCCESS, payload: data.content })
+        dispatch({ type: CREATE_CONTENT_SUCCESS, payload: data.success })
 
     } catch (error) {
 
@@ -128,3 +140,72 @@ export const getSingleContent = (contentId) => async (dispatch) => {
         dispatch({ type: SINGLE_CONTENT_FAIL, payload: error.response.data.error })
     }
 }
+
+export const addComment = (id, comment) => async (dispatch) => {
+    try {
+        dispatch({ type: ADD_COMMENT_REQUEST })
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+        const { data } = await axios.patch(`/api/content/comment/${id}`,{comment}, config)
+
+        dispatch({ type:ADD_COMMENT_SUCCESS,payload:data})
+
+    } catch (error) {
+        dispatch({ type: ADD_COMMENT_FAIL, payload: error.response.data.error })
+    }
+}
+
+export const getPopularContents = (movieId,contentId) =>async (dispatch) =>{
+    try {
+        dispatch({type:GET_POPULAR_REVIEWS_REQUEST})
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+        const {data} = await axios.post(`/api/content/get-popular-contents/${movieId}`,{contentId},config)
+        dispatch({type:GET_POPULAR_REVIEWS_SUCCESS,payload:data})
+        
+    } catch (error) {
+        dispatch({ type: GET_POPULAR_REVIEWS_FAIL, payload: error.response.data.error })
+    }
+}
+
+export const getSuggestedContents =() => async(dispatch) =>{
+try {
+    dispatch({type:GET_SUGGEST_REVIEWS_REQUEST})
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    const {data} = await axios.get('/api/content/get-suggested-contents')
+    dispatch({type:GET_SUGGEST_REVEIWS_SUCCESS,payload:data.contents})
+    
+} catch (error) {
+    dispatch({ type: GET_SUGGEST_REVIEWS_FAIL, payload: error.response.data.error })
+}
+}
+
+export const getChannelDetails = (channelId) =>async (dispatch)=>{
+    try {
+        dispatch({type:GET_CHANNEL_DETAILS_REQUEST})
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+        const {data} = await axios.post(`/api/content/channel/${channelId}`,config)
+        
+        dispatch({type:GET_CHANNEL_DETAILS_SUCCESS,payload:data.channel})
+        
+    } catch (error) {
+        dispatch({ type: GET_CHANNEL_DETAILS_FAIL, payload: error.response.data.error })
+    }
+
+}
+
+

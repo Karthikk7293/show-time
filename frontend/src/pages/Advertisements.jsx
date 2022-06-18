@@ -13,7 +13,6 @@ import { USER_AVATAR } from '../assets/icons';
 function AdProviders() {
 
     return (
-        <UserDashboardLayout>
             <Row>
                 <Col className='advertisement-main-screen  rounded-0 py-2' lg={4}>
                     <div className='advertisement-main-screen-sub px-2' >
@@ -118,7 +117,6 @@ function AdProviders() {
                     </div>
                 </Col>
             </Row>
-        </UserDashboardLayout>
     )
 }
 

@@ -30,8 +30,8 @@ function HomeScreen() {
     return (
         <>
            <Header/>
-            <Container className='py-5' fluid>
-                <Row>
+            <Container className='py-5 ' fluid>
+                <Row >
                     <Banner  />
                 </Row>
             </Container>
@@ -40,9 +40,9 @@ function HomeScreen() {
                     <h2>TRENDING VIDEOS</h2>
                 </div>
                 <Suspense  fallback={<Loader/>}>
-                <Row className='trending-row p-2 rounded   mx-auto' style={{ background: "linear-gradient(90.33deg, rgba(196, 196, 196, 0.22) 0.27%, rgba(196, 196, 196, 0) 99.71%)" }}>
-                    {contents ? contents.map((content)=>(
-                    <Card  content={content} />
+                <Row className='trending-row p-2 rounded   mx-auto' style={{ background: "linear-gradient( rgba(196, 196, 196, 0.22) 0.27%, rgba(196, 196, 196, 0) 99.71%)" }}>
+                    {contents ? contents.map((content,index)=>(
+                    <Card key={index} content={content} />
 
                     )) : <Loader/>}
                 </Row>
@@ -53,7 +53,7 @@ function HomeScreen() {
                     <h2>POPULAR VIDEOS</h2>
                 </div>
                 <Suspense  fallback={<Loader/>}>
-                <Row className='trending-row p-2 rounded mx-auto ' style={{ background: "linear-gradient(90.33deg, rgba(196, 196, 196, 0) 0.27%, rgba(196, 196, 196, 0.22) 99.71%)" }}>
+                <Row className='trending-row p-2 rounded mx-auto ' style={{ background: "linear-gradient( rgba(196, 196, 196, 0) 0.27%, rgba(196, 196, 196, 0.22) 99.71%)" }}>
 
                     <Card />
                     <Card />

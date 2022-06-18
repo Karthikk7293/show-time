@@ -35,7 +35,7 @@ const adminRegister = CatchAsyncError(async(req,res,next)=>{
 })
 
 const logout = CatchAsyncError( async(req,res,next)=>{
-    res.status(201).cookie("token",null,{
+    res.status(201).cookie("adminToken",null,{
         expires:new Date(Date.now()),
         httpOnly:true,
     }).json({

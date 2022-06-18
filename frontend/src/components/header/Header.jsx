@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import './header.css'
+import './header.js'
 import SearchBar from '../search/SearchBar';
 import ProfilePic from '../avatar/ProfilePic';
 import Notification from '../avatar/Notification';
@@ -126,6 +127,7 @@ function Header() {
                     </Toolbar>
                 </Container>
                 {/* {!loader && <LinearProgress />} */}
+                <div class="progress"></div>
             </AppBar>
 
         </div>

@@ -5,16 +5,11 @@ import User from "../models/userModel.js";
 import Admin from "../models/adminModel.js";
 
 const authenticatedUser = CatchAsyncError(async (req, res, next) => {
-    let token = req.headers.cookie
+    let {userToken} = req.cookies
+    if (userToken) {
+        if (!userToken) return next(new ErrorHandler("Please Login to access this resource", 401))
 
-    token = token.split("=")[0]
-
-    if (token === "userToken") {
-        let token = req.headers.cookie
-        token = token.split("=")[1]
-        if (!token) return next(new ErrorHandler("Please Login to access this resource", 401))
-
-        const decodeData = JWT.verify(token, process.env.JWT_SECRET)
+        const decodeData = JWT.verify(userToken, process.env.JWT_SECRET)
 
         const user = await User.findById(decodeData.id)
 
@@ -32,14 +27,11 @@ const authenticatedUser = CatchAsyncError(async (req, res, next) => {
 })
 
 const authenticatedAdmin = CatchAsyncError(async (req, res, next) => {
-    let token = req.headers.cookie
-    token = token.split("=")[0]
-    if (token === "adminToken") {
-        let token = req.headers.cookie
-        token = token.split("=")[1]
-        if (!token) return next(new ErrorHandler("Please Login to access this resource", 401))
+    let {adminToken} = req.cookies
+    if (adminToken) {
+        if (!adminToken) return next(new ErrorHandler("Please Login to access this resource", 401))
 
-        const decodeData = JWT.verify(token, process.env.JWT_SECRET)
+        const decodeData = JWT.verify(adminToken, process.env.JWT_SECRET)
 
         const admin = await Admin.findById(decodeData.id)
 

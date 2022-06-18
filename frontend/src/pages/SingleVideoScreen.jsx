@@ -16,11 +16,12 @@ function SingleVideoScreen() {
     const [ad, setAd] = useState(false)
     const params = useParams();
     const dispatch = useDispatch()
-    console.log(params.contentId);
+    const {loading, singleContent, } = useSelector((state)=>state.singleContent)
+    console.log(singleContent);
 
     useEffect(() => {
     dispatch(getSingleContent(params.contentId))
-    }, [dispatch])
+    }, [dispatch,params])
     
 
     if (title || video || ad) {
@@ -47,11 +48,10 @@ function SingleVideoScreen() {
     }
 
     return (
-        <UserDashboardLayout>
             <Row>
                 <Col lg={4}>
                     <div className="video-content-main pt-3">
-                        <MovieCard />
+                        <MovieCard video={singleContent && singleContent} />
                     </div>
                     <div className="video-content-body my-3   rounded  p-3">
                         <div className="  my-3 px-2 profile rounded d-flex justify-content-between">
@@ -98,7 +98,6 @@ function SingleVideoScreen() {
                     </Row>
                 </Col>
             </Row>
-        </UserDashboardLayout>
     )
 }
 

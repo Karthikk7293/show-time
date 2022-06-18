@@ -13,6 +13,6 @@ Router.route('/register').post(adminRegister);
 
 Router.route("/logout").get(logout);
 
-Router.route('/allusers').get(authenticatedAdmin,getAllUsers)
+Router.route('/allusers').get(getAllUsers)
 
 export default Router;

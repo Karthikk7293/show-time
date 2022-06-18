@@ -5,7 +5,6 @@ import UserDashboardLayout from '../components/layouts/UserDashboardLayout'
 
 function AllSubscribers() {
   return (
-    <UserDashboardLayout>
         <Row className="">
             <Col className='all-subscribers-main' lg={10}>
                 <div className="all-subscibers-title">
@@ -16,7 +15,6 @@ function AllSubscribers() {
                 </div>
             </Col>
         </Row>
-    </UserDashboardLayout>
   )
 }
 

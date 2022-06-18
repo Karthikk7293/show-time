@@ -11,28 +11,39 @@ import AdCard from '../components/adCard/AdCard.jsx';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllContents } from '../Redux/User/Actions/contentActions';
-
+import { getAllContents, getPopularContents, getSuggestedContents } from '../Redux/User/Actions/contentActions';
+import { CLEAR_USER_ERRORS } from '../Redux/User/Constants/userConstants';
+import notfount from '../assets/notfount.gif'
+import {LOADER_GIF_IMAGE} from '../assets/icons'
 
 
 function WatchVideoScreen() {
     const params = useParams()
     const dispatch = useDispatch()
     const [singleContent,setSingleContent] = useState(null);
-    const {contents,loading,error} = useSelector((state)=>state.content)
+
+    const {contents} = useSelector((state)=>state.content)
+
+    const {suggestedContents,popularContents,loading,count,error} = useSelector((state)=>state.popularContents)
+
     
-    
+
+
+
 
     useEffect(() => {
         dispatch(getAllContents())
+        dispatch(getSuggestedContents())
     }, [dispatch])
    
     useEffect(() => {
         if(contents){
             let [content] =contents.filter((data)=>data._id===params.id)
             setSingleContent(content)
+        dispatch(getPopularContents(content?.movie.id,content?._id))
         } 
-    }, [params,contents])
+        
+    }, [params,contents,dispatch])
     
     
     return (
@@ -46,18 +57,32 @@ function WatchVideoScreen() {
                         {/* <AdCard/> */}
 
                     </Col>
-                    <Col lg={4} className="mx-auto ">
+                    <Col lg={4} className="mx-auto border">
                         <div className="upnext px-3 my-3 ">
                             <p className="upnext-title text-white h4">POPULAR REVIEWS</p>
-                            <SuggestionsCard />
-                            <SuggestionsCard />
-                            <SuggestionsCard />
-                            <SuggestionsCard />
-                            <SuggestionsCard />
-                            <SuggestionsCard />
-                            <SuggestionsCard />
+                            {loading && <div className='text-center'><img width={"60"} src={LOADER_GIF_IMAGE}/></div> }
+                            {count && count !== 0 ? <div>
+                                {popularContents.map((data)=>(
+                                    <SuggestionsCard suggestions={data} />
+                                ))}
+                            </div> : <div className='text-center'><img width={"120"}  src={notfount}/></div> }
+                            
+                            
+                        </div>
+                        <div className="upnext px-3 my-3 ">
+                            <p className="upnext-title text-white h4">SUGGESTED REVIEWS</p>
+                            {loading ? <div className='text-center'><img width={"60"} src={LOADER_GIF_IMAGE}/></div>  : <div>
+                                {suggestedContents && suggestedContents.map((item)=>(
+                                    <div key={item._id}>
+                                        <SuggestionsCard  suggestions={item} />
+                                    </div>
+                                ))}
+                            </div> }
+                            
+                           
                         </div>
                     </Col>
+                    
                 </Row>
             </Container>
             <Footer />

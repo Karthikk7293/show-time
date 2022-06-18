@@ -16,7 +16,7 @@ import SelectedMovie from '../components/selectMovie/SelectedMovie';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 const currencies = [
-   
+
     {
         value: 'language=en-US',
         label: 'ENGLISH',
@@ -79,8 +79,8 @@ function SelectMovieScreen() {
 
     const [value, setValue] = useState(0);
 
-    const [language,setLanguage] = useState("");
-const {movieDetails,movie} = useSelector((state)=>state.movie)
+    const [language, setLanguage] = useState("");
+    const { movieDetails, movie } = useSelector((state) => state.movie)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -89,7 +89,6 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
         setLanguage(e.target.value)
     };
     return (
-        <UserDashboardLayout>
             <Row>
                 <Col className='select-movie-main' lg={11}>
                     <div className="select-movie-categories-list d-flex text-white" style={{ overflowX: "scroll" }}>
@@ -112,9 +111,9 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
                                     <Tab label="NOW PLAYING" className='bg-white text-primary rounded mx-2' />
                                 </Tabs>
                                 <div className="select-movie-button d-flex justify-content-between">
-                                <div className='my-auto'>
-                                       <Link to={'/content/upload/video'}> <button className='border-0   bg-danger text-white shadow-3 px-4 py-2 mx-4'>back </button></Link>
-                                       {movie && <SelectedMovie movieDtails={movieDetails} />}
+                                    <div className='my-auto'>
+                                        <Link to={'/content/upload/video'}> <button className='border-0   bg-danger text-white shadow-3 px-4 py-2 mx-4'>back </button></Link>
+                                        {movie && <SelectedMovie movieDtails={movieDetails} />}
                                     </div>
                                     <div className=' mx-5 '>
                                         <TextField
@@ -125,7 +124,7 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
                                             helperText="Please select your language"
                                             variant="standard"
                                             className=' standard-select-currency '
-                                            
+
                                         >
                                             {currencies.map((option) => (
                                                 <MenuItem className='' key={option.value} value={option.value}>
@@ -134,12 +133,12 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
                                             ))}
                                         </TextField>
                                     </div>
-                                   
+
                                 </div>
                             </Box>
-                           
+
                             <TabPanel value={value} index={0}>
-                                <SelectMovieSubScreen category={"upcoming"} language={language ? language : ""}  />
+                                <SelectMovieSubScreen category={"upcoming"} language={language ? language : ""} />
                             </TabPanel>
                             <TabPanel value={value} index={1}>
                                 <SelectMovieSubScreen category={"trending"} language={language ? language : ""} />
@@ -156,14 +155,13 @@ const {movieDetails,movie} = useSelector((state)=>state.movie)
                             <TabPanel value={value} index={5}>
                                 <SelectMovieSubScreen category={"now_playing"} language={language ? language : ""} />
                             </TabPanel>
-                            
+
                         </Box>
                     </div>
-                    
+
                 </Col>
-                
+
             </Row>
-        </UserDashboardLayout>
     )
 }
 

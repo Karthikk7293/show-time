@@ -18,7 +18,11 @@ function UserDashboardLayout({ children }) {
         if (userData) {
             userData = JSON.parse(userData)
             setUser(userData)
+            if(userData.channel && userData.banner){
+                setChannel({...channel,banner:userData.banner.url,channel_name:userData.channel})
+            }
         }
+
 
     }, [])
 
@@ -38,19 +42,19 @@ function UserDashboardLayout({ children }) {
             <Header />
             <Container className='common-dashboard-container  ' >
 
-                <Row className='my-5'>
+                <Row className='mt-5'>
                     <Col lg={12}>
 
                         <div className="user-dashboard-banner mt-3  pt-5 d-xs-none d-sm-none d-lg-block ">
-                            <img className='banner-image position-absolute rounded-3 ' src={CHANNER_BANNER}  alt="" />
-                            <img className='profile-image position-relative ' src={user ? user.avatar.url : USER_AVATAR} alt="" />
+                           {user ? <img className='banner-image position-absolute rounded-3 ' src={user.banner ? user.banner.url : CHANNER_BANNER}  alt="" /> : <img className='banner-image position-absolute rounded-3 ' src={CHANNER_BANNER}  alt="" /> } 
+                           {user ? <img className='profile-image position-relative' src={user.avatar ? user.avatar.url : USER_AVATAR} alt="" /> : <img className='profile-image position-relative ' src={ USER_AVATAR} alt="" /> } 
                         </div>
 
                     </Col>
                     <div className="col-12 d-lg-none d-col-block d-md-none d-sm-none ">
                         <div className=" mt-3  pt-5  text-center">
                             <img className='banner-image' width={"100%"} height={"200"} src={CHANNER_BANNER} alt="" />
-                            <img className='profile-i  ' width={"100"} src={user ? user.avatar.url : USER_AVATAR} alt="" />
+                            <img className='profile-image  ' width={"100"} src={ USER_AVATAR} alt="" />
                         </div>
                     </div>
                     <Col lg={9} className=" d-flex justify-content-between my-4  ms-auto">
@@ -58,16 +62,17 @@ function UserDashboardLayout({ children }) {
 
                             {edit ?
                                 <form className="input-tag" onSubmit={handleSubmit}>
-                                    <input type="text" className=' text-capitalize h3 ' placeholder={channel.channel_name} value={channel.channel_name} onChange={((e) => setChannel({ ...channel, channel_name: e.target.value }))} autoFocus />
+                                    <input type="text" className=' text-capitalize h3 ' placeholder={user.channel} value={user.channel} onChange={((e) => setChannel({ ...channel, channel_name: e.target.value }))} autoFocus />
                                     <input type="submit" className='my-auto border rounded px-2' value='save' />
                                 </form>
                                 :
-                                <div className='input-tag d-flex '>
-                                    <h3>the movie analyst</h3>
+                                <div className='input-tag d-flex mt-4'>
+                                    <h3>{user && user.channel}</h3>
                                     <span className='my-auto mx-5 ' onClick={(() => handleClick("name"))}><ion-icon name="create-outline"></ion-icon></span>
                                 </div>}
+                                <p className='text-muted mx-2'>{user?.name}</p>
                         </div>
-                        <div className="navigate-to-dashboard text-uppercase   me-5">
+                        <div className="navigate-to-dashboard text-uppercase mt-5   me-5">
                             <Link to={'/content/upload/video'} className="navigate-to-dashboard-link  px-4 py-2 ">
 
                                 <span> upload videos</span><i></i>

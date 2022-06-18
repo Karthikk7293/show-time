@@ -10,7 +10,6 @@ function AdminDashboard() {
   const [users, setUsers] = useState(12);
 
   const { allUsers } = useSelector((state) => state.users)
-  // console.log(allUsers);
 
   useEffect(() => {
     dispatch(getAllUsers())
@@ -18,7 +17,7 @@ function AdminDashboard() {
   }, [dispatch])
 
   return (
-    <AdminLayout>
+    <Row>
       <Row className='my-3' >
         <Col className='border  mx-auto' lg={2}>
           <h1 className='text-white'>{users}</h1>
@@ -47,9 +46,8 @@ function AdminDashboard() {
           <h1 className='text-white'>{users}</h1>
         </Col>
       </Row>
-    
+      </Row>
 
-    </AdminLayout>
   )
 }
 

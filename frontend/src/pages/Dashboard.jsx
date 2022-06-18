@@ -10,22 +10,20 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const [videos,setVideos] = useState(null);
   const {contents} = useSelector((state)=>state.content)
-  const  {userDetails} = useSelector((state)=>state.user)
-  // console.log(userDetails,'user details');
+  const  {userData} = useSelector((state)=>state.user)
+  // console.log(userData,'user details');
   // console.log(contents);
 
   useEffect(()=>{
     
     dispatch(getAllContents())
     setVideos(contents.filter((data)=>(
-      data.owner===userDetails._id
+      data.owner===userData._id
       )))
   },[dispatch])
   
   
-  console.log(videos);
   return (
-    <UserDashboardLayout>
     <Row>
       {videos?.map((video)=>(
         <Col lg={4} key={video._id} className="my-2">
@@ -33,7 +31,6 @@ export default function Dashboard() {
       </Col>
       ))}
     </Row>
-    </UserDashboardLayout>
 
   )
 }

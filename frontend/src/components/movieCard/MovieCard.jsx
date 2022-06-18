@@ -14,13 +14,13 @@ console.log(count);
             <CardMedia
                 component="img"
                 height="194"
-                image={video?.thumbnail.url}
-                alt="Paella dish"
+                image={ video && video.thumbnail?.url}
+                alt={video?.title}
             />
             </Link> 
             <div className="p-2  rounded " >
                 <div className="d-flex justify-content-between p-1 ">
-                <p className='text-primary text-uppercase' style={{fontSize:"10px"}}>likes : <span className='text-white'>{video?.likes.lenght}</span> </p>
+                <p className='text-primary text-uppercase' style={{fontSize:"10px"}}>likes : <span className='text-white'></span> </p>
                     <p className="text-muted " style={{fontSize:"10px"}}>September 14, 2016</p>
                 </div>
                 <h6 className='text-capitalize text-white'>{video?.title}</h6>

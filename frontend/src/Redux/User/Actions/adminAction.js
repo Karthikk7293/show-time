@@ -20,7 +20,7 @@ export const loginAdmin =(adminData) => async(dispatch,getState)=>{
 
         dispatch({
             type:ADMIN_LOGIN_FAIL,
-            payload:error.response.data.error
+            payload: error.response.data.error 
         })
         
     }
@@ -39,7 +39,7 @@ export const logoutAdmin = () => async (dispatch) =>{
         localStorage.removeItem("adminData")
         
     } catch (error) {
-        dispatch({type:ADMIN_LOGOUT_FAIL,payload:error.data.response.error})
+        dispatch({type:ADMIN_LOGOUT_FAIL,payload: error.response.data.error })
         
     }
     
@@ -60,7 +60,16 @@ export const getAllUsers = ()=> async (dispatch)=>{
 
     } catch (error) {
         
-        dispatch({type:GET_ALL_USERS_FAIL,payload:error.data.response.error})
+        dispatch({type:GET_ALL_USERS_FAIL,payload:error.response.data.error})
+        
+    }
+}
+
+export const blockAndUnblock = (id) => (dispatch)=>{
+    try {
+        
+        
+    } catch (error) {
         
     }
 }

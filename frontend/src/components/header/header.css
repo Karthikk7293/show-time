@@ -9,3 +9,27 @@
 .header-logo{
     cursor: pointer;
 }
+.progress {
+    height: 3px;
+    width: 0%;
+    background-color: rgb(24, 240, 255);
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    animation: progress 1s linear;
+  }
+  @keyframes progress {
+    to {
+      background-color: rgb(255, 0, 0);
+      width: 100%;
+    }
+  }
+  :root * {
+    /* Pause the animation */
+    animation-play-state: paused;
+    /* Bind the animation to scroll */
+    animation-delay: calc(var(--scroll) * -1s);
+    /* These last 2 properites clean up overshoot weirdness */
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+  }
