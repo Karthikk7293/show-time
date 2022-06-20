@@ -16,7 +16,6 @@ import AllSubscribers from './pages/AllSubscribers';
 import AdProviders from './pages/Advertisements';
 import UploadVideosSecreen from './pages/UploadVideosSecreen';
 import SelectMovieScreen from './pages/SelectMovieScreen';
-import A from './A'
 
 import AdminLoginScreen from './pages/Admin/AdminLoginScreen';
 import AdminDashboard from './pages/Admin/AdminDashboard';
