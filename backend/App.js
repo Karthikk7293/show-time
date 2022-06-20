@@ -50,10 +50,10 @@ App.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
   console.log("api here");
-  App.use(express.static(path.join(__dirname, '../frontend/build')))
+  App.use(express.static(path.join(__dirname, './frontend/build')))
 
   App.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, '../frontend', '/build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
   )
 } else {
   App.get('/', (req, res) => {
