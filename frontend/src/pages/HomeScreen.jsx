@@ -1,14 +1,9 @@
-import React, {useEffect,useState, lazy, Suspense } from 'react'
+import React, {useEffect,useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Loader from '../components/icons/Loader.jsx'
 import { getAllContents } from '../Redux/User/Actions/contentActions.js'
-
-// const Banner = lazy(()=>import('../components/banner/Banner'))
-// const Header = lazy(()=>import('../components/header/Header'))
-// const Footer = lazy(()=>import('../components/footer/Footer'))
-// const Card = lazy(()=>import('../components/card/Card'))
 
 import Banner from '../components/banner/Banner.jsx'
 import Header from '../components/header/Header.jsx'
@@ -35,34 +30,30 @@ function HomeScreen() {
                     <Banner  />
                 </Row>
             </Container>
-            <Container className='px-5' fluid>
-                <div className="trending-card-title py-3 text-white">
+            <Container className='' fluid>
+                <div className="trending-card-title py-3 text-white text-center">
                     <h2>TRENDING VIDEOS</h2>
                 </div>
-                <Suspense  fallback={<Loader/>}>
-                <Row className='trending-row p-2 rounded   mx-auto' style={{ background: "linear-gradient( rgba(196, 196, 196, 0.22) 0.27%, rgba(196, 196, 196, 0) 99.71%)" }}>
+               
+                <Row className='trending-row  rounded   mx-3 ' style={{ background: "linear-gradient( rgba(196, 196, 196, 0.22) 0.27%, rgba(196, 196, 196, 0) 99.71%)" }}>
                     {contents ? contents.map((content,index)=>(
                     <Card key={index} content={content} />
 
                     )) : <Loader/>}
                 </Row>
-                </Suspense>
+               
             </Container>
             <Container className='px-5 ' fluid>
                 <div className="trending-card-title py-3 text-white">
                     <h2>POPULAR VIDEOS</h2>
                 </div>
-                <Suspense  fallback={<Loader/>}>
-                <Row className='trending-row p-2 rounded mx-auto ' style={{ background: "linear-gradient( rgba(196, 196, 196, 0) 0.27%, rgba(196, 196, 196, 0.22) 99.71%)" }}>
+                
+                <Row className='trending-row p-2 rounded mx-3 ' style={{ background: "linear-gradient( rgba(196, 196, 196, 0) 0.27%, rgba(196, 196, 196, 0.22) 99.71%)" }}>
 
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-               
+                   
 
                 </Row>
-                </Suspense>
+               
             </Container>
             <Footer/>
         </>

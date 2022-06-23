@@ -36,7 +36,7 @@ function Banner() {
 
                     <Row className="  py-5 ">
 
-                        <div className="col-lg-8  py-5">
+                        <div className="col-lg-8 col-12 col-sm-6 col-md-7   py-5">
 
                             <div className="title text-light">
 
@@ -51,8 +51,8 @@ function Banner() {
                                 </p>
                             </div>
                         </div>
-                        <div className="col-lg-3 mx-auto text-end">
-                            <img width={'100%'} height={"400"} src={movie ? TMDB_IMAGE_URL + movie.poster_path : ""} alt={movie ? movie.name : movie.original_name} />
+                        <div className="col-lg-3 col-12 col-sm-5 col-md-5  mx-auto text-end">
+                            <img width={'100%'}  src={movie ? TMDB_IMAGE_URL + movie.poster_path : ""} alt={movie ? movie.name : movie.original_name} />
 
                         </div>
                         {/* <div className="col-lg-4 d-flex justify-content-end">

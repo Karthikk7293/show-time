@@ -82,7 +82,8 @@ export const contentReducer = (state = { contents: [] }, action) => {
                 loading: false,
                 like: true,
                 isUpdate: true,
-                content: action.payload
+                content: action.payload.content,
+                message:action.payload.message
             }
         case CREATE_CONTENT_FAIL:
         case GET_ALL_CONTENT_FAIL:
@@ -171,15 +172,15 @@ export const popularContentsReducer = (state = { popularContents: [], suggestedC
 }
 
 export const channelReducer = (state = { channel: {} }, action) => {
-    switch (action.payload) {
+    switch (action.type) {
         case GET_CHANNEL_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
         case GET_CHANNEL_DETAILS_SUCCESS:
+
             return {
-                ...state,
                 loading: false,
                 channel: action.payload
             }

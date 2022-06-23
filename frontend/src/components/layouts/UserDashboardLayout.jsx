@@ -45,16 +45,16 @@ function UserDashboardLayout({ children }) {
                 <Row className='mt-5'>
                     <Col lg={12}>
 
-                        <div className="user-dashboard-banner mt-3  pt-5 d-xs-none d-sm-none d-lg-block ">
+                        <div className="user-dashboard-banner mt-3  pt-5 d-none d-sm-none d-lg-block ">
                            {user ? <img className='banner-image position-absolute rounded-3 ' src={user.banner ? user.banner.url : CHANNER_BANNER}  alt="" /> : <img className='banner-image position-absolute rounded-3 ' src={CHANNER_BANNER}  alt="" /> } 
                            {user ? <img className='profile-image position-relative' src={user.avatar ? user.avatar.url : USER_AVATAR} alt="" /> : <img className='profile-image position-relative ' src={ USER_AVATAR} alt="" /> } 
                         </div>
 
                     </Col>
-                    <div className="col-12 d-lg-none d-col-block d-md-none d-sm-none ">
+                    <div className="col-12 d-lg-none  d-col-block d-md-none d-sm-none ">
                         <div className=" mt-3  pt-5  text-center">
-                            <img className='banner-image' width={"100%"} height={"200"} src={CHANNER_BANNER} alt="" />
-                            <img className='profile-image  ' width={"100"} src={ USER_AVATAR} alt="" />
+                        {user ? <img className='banner-image mb-2 ' width={"100%"} src={user.banner ? user.banner.url : CHANNER_BANNER}  alt="" /> : <img className='banner-image  ' src={CHANNER_BANNER}  alt="" /> } 
+                        {user ? <img className='profile-image ' style={{borderRadius:"50%"}} src={user.avatar ? user.avatar.url : USER_AVATAR} alt="" /> : <img className='profile-image  ' src={ USER_AVATAR} alt="" /> } 
                         </div>
                     </div>
                     <Col lg={9} className=" d-flex justify-content-between my-4  ms-auto">

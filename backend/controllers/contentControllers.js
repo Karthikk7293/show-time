@@ -198,9 +198,12 @@ const getChannelDetails = CatchAsyncError( async (req,res,next)=>{
       channel:user.channel,
       about:user.about
     }
-    // console.log(channel);
+   res.status(200).json({
+    success:true,
+    channel
+   })
   } catch (error) {
-    
+      return next(new ErrorHandler(error, 500))
   }
 })
 

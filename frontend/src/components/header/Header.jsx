@@ -121,8 +121,8 @@ function Header() {
                         </Box>
                         <SearchBar />
                         {user ? (<> <Notification /><ProfilePic /></>) : (<>
-                            <Link className='text-uppercase mx-2 text-danger' to={'/login'}>Login</Link>
-                            <Link className='text-uppercase mx-2 text-danger' to={'/login'}>sign up</Link>
+                            <Link className='text-uppercase mx-2 text-danger login-link ' to={'/login'}>Login</Link>
+                            <Link className='text-uppercase mx-2 text-danger login-link ' to={'/signup'}>sign up</Link>
                         </>)}
                     </Toolbar>
                 </Container>

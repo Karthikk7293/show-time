@@ -19,19 +19,17 @@ function CreateChannelScreen() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const {loading,update} = useSelector((state)=>state.user)
+    const {loading,update,userData} = useSelector((state)=>state.user)
     
     useEffect(() => {
-        if(update){
-            console.log("logged");
-            alert(update)
+        if(userData?.channel){
             navigate("/user/dashboard")
         }
 
         axios.get(`trending/all/day?api_key=${TMDB_API_KEY}`).then((response) => {
             setMovie(response.data.results.sort(() => { return 0.5 - Math.random() })[0])
         })
-    }, [update,navigate]);
+    }, [userData,navigate]);
     
 
     const handleSubmit = (e) => {
@@ -42,9 +40,9 @@ dispatch(updateChannel({channel:details.channel,about:details.about,image}))
         <div style={{ backgroundImage: `url(${movie ? TMDB_IMAGE_URL + movie.backdrop_path : LANDING_BANNER})`, backgroundSize: "cover", backgroundRepeat: "no-repeat" }} >
             <Container style={{ minHeight: "100vh", background: " rgba(0,0,0,.9) 100%" }} fluid>
                 <Row>
-                    <Col className='create-channel-logo mx-auto my-5 py-5 text-success' style={{ fontStyle: "italic", fontFamily: "sans-serif" }} lg={4}>
+                    <Col className='create-channel-logo mx-auto my-5 py-5 text-success d-none d-sm-block' style={{ fontStyle: "italic", fontFamily: "sans-serif" }} lg={4}>
 
-                        <h1><img width={500} src={LOGO} alt="SHOW TIME" /></h1>
+                        <h1><img width={"100%"} src={LOGO} alt="SHOW TIME" /></h1>
                         <div>
                            
                             <p >
@@ -60,7 +58,7 @@ dispatch(updateChannel({channel:details.channel,about:details.about,image}))
                         </div>
 
                     </Col>
-                    <Col className='mx-auto  text-success text-uppercase text-center my-1 p-3' lg={6}>
+                    <Col className='mx-auto  text-success text-uppercase text-center my-1 p-3' lg={5}>
                         <form onSubmit={handleSubmit}>
                             <Row className=' shadow  '>
                             <FormControl
@@ -97,15 +95,15 @@ dispatch(updateChannel({channel:details.channel,about:details.about,image}))
                             <Row>
                             {loading && <div className='text-center'><img width={"60"} src={LOADER_GIF_IMAGE}/></div>}
                             </Row>
-                            <Row className=' shadow mx-5 my-2 text-start' >
+                            <Row className=' shadow  my-2 text-start' >
                                 <label  htmlFor="">channel Name</label>
                                 <input type="text"  className=' border-0 p-2 my-2 text-white' onChange={((e)=>setDetails({...details,channel:e.target.value}))} style={{background:"rgb(255 255 255 / 10%)",outline:"none"}} required/>
                             </Row>
-                            <Row className=' shadow mx-5 my-2 text-start'>
+                            <Row className=' shadow  my-2 text-start'>
                                 <label htmlFor="">about channel</label>
                                 <textarea name="" id=""  rows="6" onChange={((e)=>setDetails({...details,about:e.target.value}))} className=' my-2 border-0 p-2 text-white' style={{background:"rgb(255 255 255 / 10%)",outline:"none"}} required></textarea>
                             </Row>
-                            <div className='text-end mx-5'>
+                            <div className='text-end '>
                                 <input style={{background:"rgb(255 255 255 / 10%)",outline:"none"}} className='px-5 py-2 border-0 text-success ' type="submit" value={"SAVE"} />
                             </div>
                         </form>

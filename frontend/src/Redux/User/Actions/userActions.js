@@ -33,7 +33,7 @@ import {
 export const loginUser = (userData) => async (dispatch,getState) => {
     try {
         dispatch({ type: USER_LOGIN_REQUEST })
-        dispatch({type:lOADING_COMPONENT_START})
+        // dispatch({type:lOADING_COMPONENT_START})
         const config = {
             headers: {
                 "Content-Type": "application/json"
@@ -48,7 +48,7 @@ export const loginUser = (userData) => async (dispatch,getState) => {
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
-            payload: error.response.data.error
+            payload: error.response.data.error 
         })
 
     }
@@ -68,7 +68,7 @@ export const logoutUser = () => async (dispatch) =>{
         localStorage.removeItem("userData");
         
     } catch (error) {
-        dispatch({type: USER_LOGOUT_FAIL,payload:error.data.response.error})
+        dispatch({type: USER_LOGOUT_FAIL,payload:error.response.data.error })
     }
 }
 
@@ -92,7 +92,7 @@ export const registerUser = (userData) => async (dispatch,getState) => {
         console.log(error);
         dispatch({
             type: REGISTER_USER_FAIL,
-            payload: error.response
+            payload: error.response.data.error 
         })
 
     }
@@ -100,15 +100,17 @@ export const registerUser = (userData) => async (dispatch,getState) => {
 
 // Load User
 
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async (dispatch,getState) => {
     try {
       dispatch({ type: LOAD_USER_REQUEST });
   
       const { data } = await axios.get(`/api/user/load`);
   
       dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+      localStorage.setItem("userData", JSON.stringify(getState().user.userData));
     } catch (error) {
-      dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+      dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.error });
+      localStorage.removeItem("userData");
     }
   };
 
@@ -130,7 +132,7 @@ export const updateProfile = (userData) => async (dispatch,getState) => {
     } catch (error) {
       dispatch({
         type: USER_UPDATE_PROFILE_FAIL,
-        payload: error.response.data.message,
+        payload: error.response.data.error 
       });
     }
   };
@@ -154,7 +156,7 @@ export const updateChannel = (channelDetails) => async (dispatch,getState)=>{
     } catch (error) {
         dispatch({
             type:UPDATE_CHANNEL_FAIL,
-            payload:error.response.data.message
+            payload:error.response.data.error 
         })
     }
 }
@@ -177,7 +179,7 @@ export const saveVideo=(id)=>async(dispatch)=>{
     } catch (error) {
         dispatch({
             type:SAVE_VIDEO_FAIL,
-            payload:error.response.data.message
+            payload:error.response.data.error 
         })
     }
     }

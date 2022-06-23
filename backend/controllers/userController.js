@@ -43,6 +43,19 @@ const logout = CatchAsyncError( async(req,res,next)=>{
     })
 })
 
+const loadUser = CatchAsyncError(async (req,res)=>{
+
+  const user = await User.findById(req.user._id)
+
+  if(!user) return next(new ErrorHandler("User is not found ! ",404))
+
+  res.status(200).json({
+    success:true,
+    user
+  })
+
+})
+
 const updateProfile  = CatchAsyncError( async (req,res)=>{
   // console.log(req.body);
     const newUserData = {
@@ -201,4 +214,4 @@ const updateProfile  = CatchAsyncError( async (req,res)=>{
       }
     })
 
-export {userLogin,userRegister,logout,updateProfile,getUserDetails,updateChannel,addSaveVideos};
+export {userLogin,userRegister,logout,updateProfile,getUserDetails,updateChannel,addSaveVideos,loadUser};

@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/9.53b59b1c.chunk.js","mappings":"gIAUA,UARA,WACE,OACE","sources":["pages/Admin/BlockedAdScreen.jsx"],"sourcesContent":["import React from 'react'\n\nfunction BlockedAdScreen() {\n  return (\n    <div>\n        \n    </div>\n  )\n}\n\nexport default BlockedAdScreen"],"names":[],"sourceRoot":""}

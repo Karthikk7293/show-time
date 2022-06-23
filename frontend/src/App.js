@@ -1,61 +1,57 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect ,lazy ,Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
-import HomeScreen from './pages/HomeScreen';
 import ErrorScreen from './pages/ErrorScreen';
-import LoginScreen from './pages/LoginScreen';
-import SignupScreen from './pages/SignupScreen';
-import WatchVideoScreen from './pages/WatchVideoScreen'
-import UserProfileScreen from './pages/UserProfileScreen'
-import Dashboard from './pages/Dashboard';
-import UserDashboardLayout from './components/layouts/UserDashboardLayout';
-import SingleVideoScreen from './pages/SingleVideoScreen';
-import AllSubscribers from './pages/AllSubscribers';
-import AdProviders from './pages/Advertisements';
-import UploadVideosSecreen from './pages/UploadVideosSecreen';
-import SelectMovieScreen from './pages/SelectMovieScreen';
+import { LOADER_GIF_IMAGE } from './assets/icons';
+import { loadUser } from './Redux/User/Actions/userActions';
+import { useAlert } from 'react-alert';
 
-import AdminLoginScreen from './pages/Admin/AdminLoginScreen';
-import AdminDashboard from './pages/Admin/AdminDashboard';
-import AllusersListScreen from './pages/Admin/AllusersListScreen';
-import AllChannelScreen from './pages/Admin/AllChannelScreen'
-import CreateChannelScreen from './pages/CreateChannelScreen';
-import AdminLayout from './components/layouts/AdminLayout';
-import AdminAccount from './pages/Admin/AdminAccount';
-import AllContents from './pages/Admin/AllContents'
-import AllAdsScreen from './pages/Admin/AllAdsScreen'
-import BlockedContentScreen from './pages/Admin/BlockedContentScreen'
-import BlockedAdScreen from './pages/Admin/BlockedAdScreen'
-import AdminChatScreen from './pages/Admin/AdminChatScreen.jsx'
+const HomeScreen = lazy(()=>import('./pages/HomeScreen'))
+const LoginScreen = lazy(()=>import('./pages/LoginScreen'))
+const SignupScreen = lazy(()=>import('./pages/SignupScreen'))
+const WatchVideoScreen = lazy(()=>import('./pages/WatchVideoScreen'))
+const UserProfileScreen = lazy(()=>import('./pages/UserProfileScreen'))
+const Dashboard = lazy(()=>import('./pages/Dashboard'))
+const UserDashboardLayout = lazy(()=>import('./components/layouts/UserDashboardLayout'))
+const SingleVideoScreen = lazy(()=>import('./pages/SingleVideoScreen'))
+const AllSubscribers = lazy(()=>import('./pages/AllSubscribers'))
+const AdProviders = lazy(()=>import('./pages/Advertisements'))
+const UploadVideosSecreen = lazy(()=>import('./pages/UploadVideosSecreen'))
+const SelectMovieScreen = lazy(()=>import('./pages/SelectMovieScreen'))
+
+const AdminLoginScreen = lazy(()=>import('./pages/Admin/AdminLoginScreen'))
+const AdminDashboard = lazy(()=>import('./pages/Admin/AdminDashboard'))
+const AllusersListScreen = lazy(()=>import('./pages/Admin/AllusersListScreen'))
+const AllChannelScreen = lazy(()=>import('./pages/Admin/AllChannelScreen'))
+const CreateChannelScreen = lazy(()=>import("./pages/CreateChannelScreen"))
+const AdminLayout = lazy(()=>import("./components/layouts/AdminLayout"))
+const AdminAccount = lazy(()=>import("./pages/Admin/AdminAccount"))
+const AllContents = lazy(()=>import("./pages/Admin/AllContents"))
+const BlockedContentScreen = lazy(()=>import("./pages/Admin/BlockedContentScreen"))
+const BlockedAdScreen = lazy(()=>import("./pages/Admin/BlockedAdScreen"))
+const AdminChatScreen = lazy(()=>import('./pages/Admin/AdminChatScreen'))
+const AllAdsScreen = lazy(()=>import('./pages/Admin/AllAdsScreen'))
 
 function App() {
-  const [isAuthenticated, setAuthenticated] = useState(null)
   const [admin,setAdmin] = useState(null)
-  const [varifyChannel,setVarifyChannel] = useState(null)
+  const [channel,setChannel] = useState(false)
+  const dispatch = useDispatch()
+  const alert = useAlert()
+  const {user,isAuthenticated,error,userData} =useSelector((state)=>state.user)
+
+  console.log(isAuthenticated);
 
   useEffect(() => {
-    let user = localStorage.getItem("userData")
-    if (user) {
-      user = JSON.parse(user)
-      setAuthenticated(user)
-      if(user.channel !==" "){
-console.log('channel here');
-        setVarifyChannel(user)
-      }
+    if(!user){
+      dispatch(loadUser())
     }
-    console.log("haiii");
-    let admin= localStorage.getItem("adminData")
-    if(admin){
-      admin = JSON.parse(admin)
-      setAdmin(admin)
-    }
-
-  }, [])
+  }, [dispatch,user,alert,error])
 
   return (
     <div className="main">
+      <Suspense fallback={<div className='py-5' style={{justifyContent:"center",textAlign:"center" }} ><img width={"40"} src={LOADER_GIF_IMAGE} alt='loading...' /></div>}>
       <BrowserRouter>
         <Routes>
           {/* user section */}
@@ -63,12 +59,12 @@ console.log('channel here');
           <Route path='/' element={<HomeScreen />} />
           <Route path='/login' element={ <LoginScreen />} />
           <Route path='/signup' element={<SignupScreen />} />
-          <Route path='/watch/video/:id' element={isAuthenticated ? <WatchVideoScreen /> : <LoginScreen />} />
+          <Route path='/watch/video/:id' element={ <WatchVideoScreen /> } />
           <Route path='/user/profile' element={<UserProfileScreen />} />
           <Route path='/user/create-channel' element={isAuthenticated ? <CreateChannelScreen/> :<LoginScreen /> }/>
 
           {/* content creator section */}
-          <Route path='/user/dashboard' element={isAuthenticated ? isAuthenticated.channel ? <UserDashboardLayout children={<Dashboard />}/>:<CreateChannelScreen/> : <LoginScreen />} />
+          <Route path='/user/dashboard' element={isAuthenticated ? userData.channel ? <UserDashboardLayout children={<Dashboard />}/>:<CreateChannelScreen/> : <LoginScreen />} />
           <Route path='/content/single/:contentId' element={isAuthenticated ? <UserDashboardLayout children={<SingleVideoScreen />}/> : <LoginScreen />} />
           <Route path='/content/all/subscribers' element={isAuthenticated ? <UserDashboardLayout children={<AllSubscribers /> }/> : <LoginScreen />} />
           <Route path='/content/ad-providers' element={isAuthenticated ? <UserDashboardLayout children={<AdProviders /> }/> : <LoginScreen />} />
@@ -95,6 +91,7 @@ console.log('channel here');
         </Routes>
 
       </BrowserRouter>
+      </Suspense>
     </div>
 
   );

@@ -39,6 +39,7 @@ function UserProfileScreen() {
             </div>
             <Row>
 
+              {/* <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
@@ -51,8 +52,7 @@ function UserProfileScreen() {
               <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
               <Col lg={3}><SuggestionsCard profile /></Col>
-              <Col lg={3}><SuggestionsCard profile /></Col>
-              <Col lg={3}><SuggestionsCard profile /></Col>
+              <Col lg={3}><SuggestionsCard profile /></Col> */}
             </Row>
           </Col>
         </Row>

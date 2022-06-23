@@ -19,7 +19,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
   
   const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1.5),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -39,7 +39,7 @@ const Search = styled('div')(({ theme }) => ({
       [theme.breakpoints.up('sm')]: {
         width: '20rem',
         '&:focus': {
-          width: '20rem',
+          width: '18rem',
         },
       },
     },
