@@ -13,7 +13,7 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     setTimeout(()=>{
         window.location.replace("/")
-    },5000)
+    },2000)
     this.setState({ error: error, errorInfo: info });
   }
   render() {
@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component {
         <div>
             <p className="content-center "><img width={"40"} src={LOADER_GIF_IMAGE} alt="" draggable={false}/></p>
             <p className="error-txt">Something went wrong</p>
-            <p className="text-center f-gray">Redirecting you to homepage in 5 sec...</p>
+            <p className=" f-gray">Redirecting you to homepage in 2 sec...</p>
         </div>
       </div>
       )

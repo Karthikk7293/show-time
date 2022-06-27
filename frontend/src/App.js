@@ -36,18 +36,15 @@ const AllAdsScreen = lazy(()=>import('./pages/Admin/AllAdsScreen'))
 
 function App() {
   const [admin,setAdmin] = useState(null)
-  const [channel,setChannel] = useState(false)
   const dispatch = useDispatch()
   const alert = useAlert()
   const {user,isAuthenticated,error,userData} =useSelector((state)=>state.user)
 
   console.log(isAuthenticated);
-
-  useEffect(() => {
-    if(!user){
-      dispatch(loadUser())
-    }
-  }, [dispatch,user,alert,error])
+useEffect(()=>{
+  dispatch(loadUser())
+},[dispatch])
+ 
 
   return (
     <div className="main">

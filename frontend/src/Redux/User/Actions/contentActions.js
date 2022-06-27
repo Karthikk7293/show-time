@@ -31,6 +31,9 @@ import {
     GET_CHANNEL_DETAILS_REQUEST,
     GET_CHANNEL_DETAILS_SUCCESS,
     GET_CHANNEL_DETAILS_FAIL,
+    SUBCRIBE_REQUEST,
+    SUBCRIBE_SUCCESS,
+    SUBCRIBE_FAIL,
 } from "../Constants/contentContansts"
 
 export const selectMovie = (movieDetails) => async (dispatch) => {
@@ -206,7 +209,20 @@ export const getChannelDetails = (channelId) => async (dispatch) => {
 
         dispatch({ type: GET_CHANNEL_DETAILS_FAIL, payload: error.response.data.error })
     }
-
 }
 
-
+export const subcribeChannel = (channelId) => async (dispatch) =>{
+    try {
+        dispatch({type:SUBCRIBE_REQUEST})
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+        const {data}  = await axios.post(`/api/content/subcribe/${channelId}`,config)
+        dispatch({type:SUBCRIBE_SUCCESS,payload:data.message})
+        
+    } catch (error) {
+        dispatch({ type: SUBCRIBE_FAIL, payload: error.response.data.error })
+    }
+}

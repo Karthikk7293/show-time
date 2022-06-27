@@ -32,7 +32,7 @@ if (isAuthenticated) {
                 <div className="row login-row py-5 ">
                 {error ? <p className='text-danger text-center h6'>{error}</p> :""}
                 <div className="col-lg-12  my-2   mx-auto text-center">
-                        {loading? <div className="spinner-border text-white mx-auto" role="status"/> :""}
+                        {loading && "Loading...."}
                     </div>
                     <div className="col-lg-12 my-2 mx-auto px-4 text-center">
                         <input className='py-2 px-2 w-100' type="email" placeholder='email'

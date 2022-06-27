@@ -196,7 +196,8 @@ const getChannelDetails = CatchAsyncError( async (req,res,next)=>{
     const channel = {
       avatar:user.avatar.url,
       channel:user.channel,
-      about:user.about
+      about:user.about,
+      subscribers:user.subscribers
     }
    res.status(200).json({
     success:true,
@@ -207,4 +208,44 @@ const getChannelDetails = CatchAsyncError( async (req,res,next)=>{
   }
 })
 
-export { createContent, getAllContents, likeAndDislike, getSingleContent , addComment, getPopularContents,getSuggestedPost,getChannelDetails}
+const subscribeChannel = CatchAsyncError( async (req,res,next)=>{
+  try {
+    const channel = await User.findById(req.params.id)
+     
+    if(!channel) return next(new ErrorHandler("channel not found ! ",404))
+
+    if(channel.subscribers.includes(req.user._id)){
+
+      const index = channel.subscribers.indexOf(req.user._id)
+      
+      channel.subscribers.splice(index,1);
+
+      await channel.save()
+
+      return res.status(200).json({
+        success: true,
+        message: " Un Subcribed"
+      });
+
+    }else{
+      channel.subscribers.push(req.user._id)
+
+      await channel.save()
+
+      return res.status(200).json({
+        success: true,
+        message: "Subcribed"
+      });
+    }
+    
+  } catch (error) {
+
+     res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+
+})
+
+export { createContent, getAllContents, likeAndDislike, getSingleContent , addComment, getPopularContents,getSuggestedPost,getChannelDetails,subscribeChannel}

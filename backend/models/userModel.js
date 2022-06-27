@@ -47,6 +47,12 @@ const userSchema = new mongoose.Schema({
             ref: "User",
         }
     ],
+    subscribers: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: "users",
+        }
+    ],
     savedVideos: [
         {
             type: mongoose.Schema.ObjectId,

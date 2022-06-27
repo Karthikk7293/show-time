@@ -9,7 +9,8 @@ import Tooltip from '@mui/material/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateChannel, updateProfile } from '../Redux/User/Actions/userActions';
 import { useNavigate } from 'react-router-dom';
-
+import CHANNEL_BANNER  from '../assets/CHANNEL_BANNER.png';
+ 
 function CreateChannelScreen() {
     const [movie, setMovie] = useState('');
     const [showCropper, setShowCropper] = useState(false)
@@ -74,7 +75,7 @@ dispatch(updateChannel({channel:details.channel,about:details.about,image}))
                         />
                         <Tooltip title="Add Banner For Your Channel">
                         <label htmlFor="upload_thumbnail" className='  upload-thumbnail px-auto ' style={{height:"13rem"}}  >
-                            <img className='my-5 rounded p-0 m-0' src={image ? image : LANDING_BANNER} alt="" width={"85%"}  />
+                            <img className='my-5 rounded p-0 m-0 w-100' src={image ? image : CHANNEL_BANNER} alt=""   />
                             </label>
                         </Tooltip>
                         {/* {loading ? <Loader /> : ""} */}

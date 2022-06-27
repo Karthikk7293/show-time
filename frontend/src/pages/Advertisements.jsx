@@ -10,6 +10,7 @@ import './pages.css'
 import { Avatar } from '@mui/material';
 import { USER_AVATAR } from '../assets/icons';
 
+
 function AdProviders() {
 
     return (
@@ -94,7 +95,8 @@ function AdProviders() {
                             <SnackbarContent message="I love snacks." /> <p className='m-0 py-0 text-end text-muted  pe-2'>09:15pm</p>
                         </div>
                         <div className="my-2 pe-5 me-4">
-                            <SnackbarContent message="I love snacks." /> <p className='m-0 py-0 text-end text-muted  pe-2'>09:15pm</p>
+                            
+                            <SnackbarContent message="I love snacks."  /> <p className='m-0 py-0 text-end text-muted  pe-2'>09:15pm</p>
                         </div>
                         <div className="my-2 ps-5 ms-4">
                             <SnackbarContent message="I love snacks." /> <p className='m-0 py-0 text-end text-muted  pe-2'>09:15pm</p>
@@ -104,6 +106,10 @@ function AdProviders() {
                         </div>
                         <div className="my-2 ps-5 ms-4">
                             <SnackbarContent message="I love snacks." /> <p className='m-0 py-0 text-end text-muted pe-2'>09:15pm</p>
+                        </div>
+                        <div className="my-2  d-flex">
+                        <Avatar className='me-1 mt-1'/>
+                            <span><SnackbarContent message="I love snacks." style={{maxWidth:"100"}} /> <p className='m-0 py-0 text-end text-muted pe-2'>09:15pm</p></span>
                         </div>
 
                     </div>

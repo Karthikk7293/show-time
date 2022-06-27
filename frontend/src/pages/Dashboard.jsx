@@ -16,10 +16,11 @@ export default function Dashboard() {
 
   useEffect(()=>{
     
-    dispatch(getAllContents())
+   
     setVideos(contents.filter((data)=>(
       data.owner===userData._id
       )))
+      dispatch(getAllContents())
   },[dispatch])
   
   

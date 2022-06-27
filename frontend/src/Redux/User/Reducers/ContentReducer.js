@@ -13,7 +13,7 @@ import {
     GET_POPULAR_REVIEWS_REQUEST, GET_POPULAR_REVIEWS_SUCCESS, GET_SUGGEST_REVEIWS_SUCCESS,
     GET_SUGGEST_REVIEWS_FAIL, GET_SUGGEST_REVIEWS_REQUEST, LIKE_CONTENT_RESET, LIKE_VIDEO_FAIL,
     LIKE_VIDEO_REQUEST, LIKE_VIDEO_SUCCESS, REMOVE_MOVIE_REQUEST, REMOVE_MOVIE_SUCCESS,
-    SINGLE_CONTENT_FAIL, SINGLE_CONTENT_REQUEST, SINGLE_CONTENT_SUCCESS
+    SINGLE_CONTENT_FAIL, SINGLE_CONTENT_REQUEST, SINGLE_CONTENT_SUCCESS, SUBCRIBE_FAIL, SUBCRIBE_REQUEST, SUBCRIBE_SUCCESS
 } from "../Constants/contentContansts";
 import { CLEAR_USER_ERRORS } from "../Constants/userConstants";
 
@@ -83,7 +83,7 @@ export const contentReducer = (state = { contents: [] }, action) => {
                 like: true,
                 isUpdate: true,
                 content: action.payload.content,
-                message:action.payload.message
+                message: action.payload.message
             }
         case CREATE_CONTENT_FAIL:
         case GET_ALL_CONTENT_FAIL:
@@ -174,17 +174,23 @@ export const popularContentsReducer = (state = { popularContents: [], suggestedC
 export const channelReducer = (state = { channel: {} }, action) => {
     switch (action.type) {
         case GET_CHANNEL_DETAILS_REQUEST:
+        case SUBCRIBE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
         case GET_CHANNEL_DETAILS_SUCCESS:
-
             return {
                 loading: false,
                 channel: action.payload
             }
+        case SUBCRIBE_SUCCESS:
+            return {
+                loading: false,
+                subscribe: action.payload
+            }
         case GET_CHANNEL_DETAILS_FAIL:
+        case SUBCRIBE_FAIL:
             return {
                 ...state,
                 loading: false,

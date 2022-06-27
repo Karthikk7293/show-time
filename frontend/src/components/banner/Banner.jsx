@@ -30,20 +30,13 @@ function Banner() {
             // background:url(http://image.tmdb.org/t/p/w500/wrhLyiY7ksW0fQCqNpa52qiOAH8.jpg)
             className="conatainer-fluid banner m-0 p-0" >
             <div className="banner-row ">
-
-
                 <Container className='py-5'>
-
                     <Row className="  py-5 ">
-
                         <div className="col-lg-8 col-12 col-sm-6 col-md-7   py-5">
-
                             <div className="title text-light">
-
                                 <h1 className='text-uppercase '>{movie && movie ? movie.original_title : movie.original_name ? movie.name : ""} </h1>
                                 {movie.vote_average && <Rating {...options} />}
                             </div>
-
                             <div className="description text-light mt-4">
                                 <h3> Start Streming On {movie ? movie.first_air_date : movie.release_date}</h3>
                                 <p>
@@ -53,7 +46,6 @@ function Banner() {
                         </div>
                         <div className="col-lg-3 col-12 col-sm-5 col-md-5  mx-auto text-end">
                             <img width={'100%'}  src={movie ? TMDB_IMAGE_URL + movie.poster_path : ""} alt={movie ? movie.name : movie.original_name} />
-
                         </div>
                         {/* <div className="col-lg-4 d-flex justify-content-end">
                     <div className="poster-card rounded shadow col-d-none d-lg-block">

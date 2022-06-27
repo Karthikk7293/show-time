@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useAlert } from 'react-alert'
+
 
 import './videoCard.css'
 import CommentCard from '../comments/CommentCard'
-import { addComment, getChannelDetails, likeAndDislikeContents } from '../../Redux/User/Actions/contentActions';
+import { addComment, getChannelDetails, likeAndDislikeContents,subcribeChannel } from '../../Redux/User/Actions/contentActions';
 import { LIKE_CONTENT_RESET } from '../../Redux/User/Constants/contentContansts';
 import { saveVideo } from '../../Redux/User/Actions/userActions';
 import { LOADER_GIF_IMAGE } from '../../assets/icons';
@@ -30,12 +30,13 @@ const ExpandMore = styled((props) => {
 }));
 function VideoCard({ content }) {
     const [like, setLike] = useState(null);
+    const[subcribed,setSbscribed] = useState(false)
     const dispatch = useDispatch();
     const [userComment, setUserComment] = useState(null)
     const { like: likes, isUpdate, content: video, error, loading: load, message } = useSelector((state) => state.content)
     const { userDetails } = useSelector((state) => state.user)
     const { comment, success, loading } = useSelector((state) => state.singleContent)
-    const { channel, error: channelError, loading: channelLoading } = useSelector((state) => state.channelDetails)
+    const { channel, error: channelError, loading: channelLoading,subscribe } = useSelector((state) => state.channelDetails)
 
 
     const alert = useAlert()
@@ -46,6 +47,7 @@ function VideoCard({ content }) {
 
         if (likes) {
             setLike(!like)
+            alert.success(likes)
         }
         if (isUpdate) {
             dispatch({ type: LIKE_CONTENT_RESET })
@@ -60,7 +62,12 @@ function VideoCard({ content }) {
             }
             dispatch(getChannelDetails(content.owner))
         }
-        if (error) {
+        if(subscribe){
+            alert.success(subscribe)
+            
+        }
+       
+        if (error || channelError) {
             alert.error(error)
             dispatch({type:CLEAR_USER_ERRORS})
         }
@@ -71,7 +78,7 @@ function VideoCard({ content }) {
         content,
         success,
         userDetails,
-        error, alert, likes, video, message])
+        error, alert, likes, video, message,subscribe])
 
     const likeHandler = (e) => {
         e.preventDefault()
@@ -82,7 +89,7 @@ function VideoCard({ content }) {
         if (userComment) {
             dispatch(addComment(content._id, userComment))
         } else {
-            alert("fill first")
+            alert.error("Please enter somthing")
         }
     }
 
@@ -98,6 +105,11 @@ function VideoCard({ content }) {
         setExpanded(!expanded);
         setHide(!hide);
     };
+    const subcribeHandler = (e)=>{
+        e.preventDefault()
+        dispatch(subcribeChannel(content.owner))
+    }
+   
     return (
         <div>
             <div className="video-content">
@@ -128,18 +140,18 @@ function VideoCard({ content }) {
                         <h4 className='my-auto mx-1 text-white'>{channel?.channel}</h4>
                     </div>
                     <div className="subscibe-btns">
-                        <input type="submit" value='SUBSCRIBE' className='border-0 px-3 py-2 shadow' />
-                        {/* <input type="submit"  value='SUBSCRIBED'/> */}
+                        { subcribed   ? <input type="submit" value='SUBSCRIBED' className='border-0 px-3 py-2 shadow' onClick={subcribeHandler} /> : <input type="submit" value='SUBSCRIBE' className='border-0 px-3 py-2 shadow' onClick={subcribeHandler} /> }
+                        
                     </div>
                 </div>
                 <hr />
                 <pre className='text-white text-wrap'>{content && content.description.split(" ").map((text) => {
                     let value = text.match(/#[\w]+/gm)
-                    if (value) return <span className='text-primary fw-500' style={{ cursor: "pointer" }} ><br /> {" " + value[0] + " "}</span>
+                    if (value) return <pre className='text-primary fw-500' style={{ cursor: "pointer" }} ><br /> {"\n" + value[0] + "\n"}</pre>
                     else return text + " "
                 })}</pre>
 
-                <div className="video-descriptions mx-2 text-muted">show more
+                <div style={{cursor:"pointer"}} className="video-descriptions mx-2 text-muted">show more
                     {/* <p className='text-white '>Release date : {content && content.movie.release_date}</p> */}
                     {/* <p>Popularity : {content && content.movie.popularity}</p> */}
                 </div>
@@ -159,16 +171,14 @@ function VideoCard({ content }) {
                             </div>
                         </Col>
                         <Col className=' my-1' lg={12}>
-                            <div className=' '>
-                               
+                            <div className=' ' >
 
-                                    {hide ? <p  onClick={handleExpandClick} className='m-0 text-muted'>show less</p> : <p onClick={handleExpandClick} className='m-0 text-muted'>show more</p>}
-                                    
-
+                                    {hide ? <p style={{cursor:"pointer"}}  onClick={handleExpandClick} className='m-0 text-muted'>show less</p> : <p style={{cursor:"pointer"}} onClick={handleExpandClick} className='m-0 text-muted'>show more</p>}
+                                   
                                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                
-                                    {content?.comments.map((comment) => (
-                                        <div key={comment._id}>
+                            
+                                    { content?.comments.map((comment,index) => (
+                                        <div key={index}>
                                             <CommentCard comment={comment} />
                                             
                                         </div>

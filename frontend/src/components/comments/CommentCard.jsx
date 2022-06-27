@@ -4,7 +4,7 @@ import Avatar from '../../components/icons/Avatar'
 import { USER_AVATAR } from '../../assets/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from '../../Redux/User/Actions/adminAction';
-
+import moment from 'moment';
 
 
 function CommentCard({ content, comment }) {
@@ -15,24 +15,26 @@ function CommentCard({ content, comment }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (allUsers) {
-            
-            setCommentedUser(allUsers.filter((user) => user._id === comment?.user))
+        if (allUsers && comment) {
+            const [user] = allUsers.filter((user) => user._id === comment.user)
+            setCommentedUser(user)
         }
         dispatch(getAllUsers())
-    }, [dispatch])
-console.log(commentedUser);
+    }, [dispatch, comment])
+
     return (
-        <div className={content ? `comment d-flex m-0 py-0 px-3` : "comment d-flex justify-content-between m-0 p-0"}>
-            <div className="user-img me-2">
-                <Avatar image={ commentedUser? commentedUser[0].avarar?.url : USER_AVATAR} />
+        <div className={content ? `comment d-flex m-0 py-0 ` : "comment   m-0 p-0 "}>
+            <div className="user-img  d-flex " style={{fontFamily:"sans-serif"}}>
+                {commentedUser && <Avatar className="border-0" image={commentedUser ? commentedUser?.avatar?.url : USER_AVATAR} />}
+                <div className="comment-content w-100  d-flex justify-content-between text-white" style={{ fontSize: "13px", fontWeight: "2px" }}>
+                    <p className='mx-2 my-auto'>{commentedUser && commentedUser?.name}</p>
+                    <span className='text-success' style={{ fontSize: "8px" }}>{comment && moment(comment.createdAt).format("lll")}</span>
+                </div>
             </div>
-            <div className="comment-content ms-2 overflow-hidden text-start">
-                <p className='m-0'>name</p>
-                {!content ? <p className='text-truncate'>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Fugit, ratione ducimus, magni aut nisi, provident sint veritatis fuga consectetur nobis illo quae?
-                    Porro sed asperiores excepturi rerum libero sapiente distinctio.</p> : <p>subscribed on : january 02 2021 </p>}
+            <div className='text-white'>
+                {comment && <p  className='text-truncate mt-2 mx-2 p-0 '>{comment?.comment}</p>}
             </div>
+            <hr className='bg-info m-0 p-0' />
         </div>
     )
 }

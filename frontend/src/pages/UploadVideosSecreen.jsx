@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LANDING_BANNER, LOADER_GIF_IMAGE } from '../assets/icons';
 import CropImage from '../components/cropper/CropImage';
 import { createContent, removeMovie } from '../Redux/User/Actions/contentActions';
+import { useAlert } from 'react-alert';
 
 function UploadVideos() {
 
@@ -28,14 +29,14 @@ function UploadVideos() {
 
     const { movie, movieDetails } = useSelector((state) => state.movie)
     const { loading,contentCreated } = useSelector((state) => state.content);
-
+    const alert = useAlert()
     useEffect(() => {
         if (movieDetails) {
             setTitle(movieDetails.title);
             setDescription(movieDetails.overview);
         }
         if(contentCreated){
-            alert("successfully uploaded!")
+            alert.success("successfully uploaded!")
         }
     }, [movieDetails, loading,contentCreated])
 
@@ -62,10 +63,7 @@ function UploadVideos() {
                  video,
                 }))
             
-            // setTitle("")
-            // setDescription("")
-            // setImage(null)
-            // dispatch(removeMovie())  
+            
         } else {
             
             alert("Please fil")
